@@ -115,9 +115,49 @@
   #back-top.show { opacity: 1; transform: translateY(0); }
   #back-top:hover { background: #1d4ed8; transform: translateY(-2px); }
   #back-top.show:hover { transform: translateY(-2px); }
+
+  /* 今日刷卡计划横幅 */
+  .daily-plan {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+    border-bottom: 2px solid #f59e0b;
+    padding: 0; max-height: 0; overflow: hidden;
+    transition: max-height .5s ease, padding .5s ease;
+  }
+  .daily-plan.show { max-height: 600px; padding: 16px 20px; }
+  .daily-plan-inner { max-width: 960px; margin: 0 auto; }
+  .daily-plan-hd {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+  }
+  .daily-plan-hd h3 { font-size: 16px; color: #92400e; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .daily-plan-hd .dp-date { font-size: 13px; color: #92400e; opacity: .8; }
+  .daily-plan-close {
+    background: rgba(146,64,14,.15); border: none; border-radius: 50%;
+    width: 28px; height: 28px; font-size: 16px; cursor: pointer; color: #92400e;
+    display: flex; align-items: center; justify-content: center; transition: .2s;
+  }
+  .daily-plan-close:hover { background: rgba(146,64,14,.3); }
+  .dp-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+  .dp-card {
+    background: rgba(255,255,255,.7); border-radius: 8px; padding: 10px 14px;
+    border-left: 3px solid #f59e0b;
+  }
+  .dp-card .dp-bank { font-size: 13px; font-weight: 700; color: #92400e; margin-bottom: 4px; }
+  .dp-card .dp-act { font-size: 12.5px; color: #78350f; line-height: 1.6; }
+  .dp-card .dp-act strong { color: #b45309; }
 </style>
 </head>
 <body>
+
+<!-- 今日刷卡计划横幅 -->
+<div class="daily-plan" id="dailyPlan">
+  <div class="daily-plan-inner">
+    <div class="daily-plan-hd">
+      <h3>📋 今日刷卡计划 <span class="dp-date" id="dpDate"></span></h3>
+      <button class="daily-plan-close" onclick="document.getElementById('dailyPlan').classList.remove('show')">×</button>
+    </div>
+    <div class="dp-cards" id="dpCards"></div>
+  </div>
+</div>
 
 <div class="hero">
   <div class="hero-qr">
@@ -2687,6 +2727,88 @@
   window.addEventListener('scroll', function(){
     btn.classList.toggle('show', window.scrollY > 400);
   });
+})();
+</script>
+
+<script>
+/* 今日刷卡计划 — 每天首次打开自动推送 */
+(function(){
+  var plans = {
+    1: [ /* 周一 */
+      { bank: '🏦 中行卡皮巴拉', act: '<strong>10:00 抽盲盒</strong>（月4次，满66元消费后抽，保底8元立减金）→ 建议上午刷1笔66元' },
+      { bank: '☕ 建行生活', act: '<strong>周一咖啡日</strong>：1分钱抽最高20元咖啡立减金 → 建行APP任务中心签到' },
+      { bank: '🍵 浦发', act: '<strong>茶咖半价</strong>（每天10:00）：喜茶9.5/茶百道8/霸王茶姬8/奈雪9.5 + 京东PLUS满99减10' },
+      { bank: '🚕 工行', act: '<strong>周一滴滴满10减5</strong> → 打车用工行运通金卡付' },
+      { bank: '💡 提醒', act: '建行每日8:00抽1-168元立减金（月1次）· 各银行APP签到' }
+    ],
+    2: [ /* 周二 */
+      { bank: '📱 农行', act: '<strong>抖音消费双倍积分</strong> → 抖音购物走农行尊然白（配合5倍包更猛）' },
+      { bank: '🚇 建行生活', act: '<strong>周二出行日</strong>：地铁公交/加油/飞机票优惠券 → 建行APP领取' },
+      { bank: '⛽ 平安', act: '<strong>加油券可用</strong>：100减50/50减25（上周五抢的券，本周二起可用）' },
+      { bank: '🍵 浦发', act: '<strong>茶咖半价</strong>（每天10:00起）' },
+      { bank: '💡 提醒', act: '工行话费满100减10 · 各银行APP签到' }
+    ],
+    3: [ /* 周三 */
+      { bank: '🍵 浦发', act: '<strong>茶咖半价</strong>（每天10:00）：喜茶/茶百道/霸王/奈雪/瑞幸9.9/蜜雪1元' },
+      { bank: '🎬 建行生活', act: '<strong>周三沉浸日</strong>：热门大片1折起 → 建行APP购票' },
+      { bank: '🧧 平安', act: '<strong>支付会员周周领好礼</strong>：微信立减金/橙长值（每周三）' },
+      { bank: '🛒 工行', act: '<strong>周三购物满30减6.6</strong> → 日用消费走工行运通金' },
+      { bank: '💡 提醒', act: '建行APP每日签到开宝箱 · 各银行APP签到' }
+    ],
+    4: [ /* 周四 */
+      { bank: '⛽ 工行', act: '<strong>周四加油满200减20</strong> → 需e生活plus小程序提前领券（每周限量）' },
+      { bank: '🐱 建行生活', act: '<strong>周四萌宠日</strong>：宠物商户满50减20 → 建行APP领取' },
+      { bank: '🍵 浦发', act: '<strong>茶咖半价</strong>（每天10:00起）' },
+      { bank: '💡 提醒', act: '今日是日常消费主力日，补充各卡年费笔数缺口 · 建行VISA刷1笔 → 中行/工行各1笔 · 各银行APP签到' }
+    ],
+    5: [ /* 周五 */
+      { bank: '☕ 光大（重头戏）', act: '<strong>星巴克满40减15</strong> + <strong>肯德基满30减10</strong> → 支付宝绑光大卡付。周五0点起星巴克，10点起肯德基' },
+      { bank: '🍔 广发', act: '<strong>超级广发日5折</strong>：麦当劳/肯德基/奈雪/霸王茶姬等代金券 → 发现精彩APP抢' },
+      { bank: '🛒 光大', act: '<strong>淘宝满200减10 / 京东满200减10 / 美团随机减</strong> → 各月1次，周五顺手用' },
+      { bank: '💰 农行', act: '<strong>支付宝碰一下满50减5</strong> → 线下扫码选农行卡' },
+      { bank: '⛽ 平安', act: '<strong>每周五抢加油券</strong>：100减50/50减25 → 好车主小程序领券中心' },
+      { bank: '💡 提醒', act: '工行周周赢好礼（周五~日）抽10-20万i豆 · 邮储支付宝天天减（满10-1）· 浦发茶咖半价 · 各银行APP签到' }
+    ],
+    6: [ /* 周六 */
+      { bank: '🍵 浦发（重头戏）', act: '<strong>10:00 茶咖1元购</strong>：瑞幸/蜜雪/喜茶/霸王/奈雪等（每月限1次）→ 浦大喜奔APP' },
+      { bank: '🍜 建行生活', act: '<strong>周六美食日</strong>：1分钱抽最高30元餐饮立减金 → 建行APP' },
+      { bank: '🛒 邮储', act: '<strong>商超5折</strong>（最高减50）+ <strong>观影5折</strong> → 邮储信用卡APP领取' },
+      { bank: '👑 邮储鼎致白', act: '<strong>周六2倍积分</strong>（月上限5万分）→ 周末大额消费集中刷鼎致白' },
+      { bank: '💡 提醒', act: '广发5折饭票 · 浦发茶咖半价 · 各银行APP签到' }
+    ],
+    0: [ /* 周日 */
+      { bank: '🍵 浦发', act: '<strong>茶咖半价</strong>（每天10:00起）：7大品牌半价茶饮' },
+      { bank: '🛒 建行生活', act: '<strong>周日商超日</strong>：1元购 + 龙积分超值换购 → 建行APP' },
+      { bank: '🛒 邮储', act: '<strong>支付宝永辉/大润发满50减5</strong> → 支付宝选邮储卡' },
+      { bank: '📊 补账户日', act: '<strong>检查各卡年费笔数进度</strong>：缺笔数的卡先补（建行VISA/中行/工行）→ 剩余走多利/光大 · 农行5倍包积分到账检查（T+2）' }
+    ]
+  };
+
+  var now = new Date();
+  var day = now.getDay();
+  var dateStr = (now.getMonth()+1) + '月' + now.getDate() + '日 · 星期' + '日一二三四五六'[day];
+  var today = now.getFullYear() + '-' + (now.getMonth()+1) + '-' + now.getDate();
+  var lastShown = null;
+  try { lastShown = localStorage.getItem('cc_daily_plan_date'); } catch(e) {}
+
+  document.getElementById('dpDate').textContent = dateStr;
+
+  var items = plans[day] || [];
+  var html = items.map(function(it){
+    return '<div class="dp-card"><div class="dp-bank">' + it.bank + '</div><div class="dp-act">' + it.act + '</div></div>';
+  }).join('');
+  document.getElementById('dpCards').innerHTML = html;
+
+  // 每天首次打开自动展开
+  if (lastShown !== today) {
+    setTimeout(function(){
+      document.getElementById('dailyPlan').classList.add('show');
+      try { localStorage.setItem('cc_daily_plan_date', today); } catch(e) {}
+    }, 600);
+  } else {
+    // 同一天再打开，不自动弹，但保留可手动展开的入口
+    document.getElementById('dailyPlan').classList.add('show');
+  }
 })();
 </script>
 
