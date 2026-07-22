@@ -119,7 +119,8 @@
   /* 今日刷卡计划横幅 */
   .daily-plan {
     background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
-    border-bottom: 2px solid #f59e0b;
+    border-radius: 12px;
+    margin-bottom: 20px;
     padding: 0; max-height: 0; overflow: hidden;
     transition: max-height .5s ease, padding .5s ease;
   }
@@ -148,17 +149,6 @@
 </head>
 <body>
 
-<!-- 今日刷卡计划横幅 -->
-<div class="daily-plan" id="dailyPlan">
-  <div class="daily-plan-inner">
-    <div class="daily-plan-hd">
-      <h3>📋 今日刷卡计划 <span class="dp-date" id="dpDate"></span></h3>
-      <button class="daily-plan-close" onclick="document.getElementById('dailyPlan').classList.remove('show')">×</button>
-    </div>
-    <div class="dp-cards" id="dpCards"></div>
-  </div>
-</div>
-
 <div class="hero">
   <div class="hero-qr">
     <img src="images/alipay-qrcode.png" alt="支付宝收款码">
@@ -186,6 +176,17 @@
   <a href="#icbc">工行</a><a href="#ccb">建行</a><a href="#ceb">光大</a>
   <a href="#cgb">广发</a><a href="#spdb">浦发</a><a href="#pingan">平安</a>
   <a href="#matrix">快速速查表</a><a href="#points">积分活动</a><a href="#roi">回报率</a><a href="#daily">每日活动</a><a href="#yunshanfu" style="background:#eff6ff;border-color:#2563eb;color:#2563eb">云闪付专区</a><a href="#mastercard" style="background:#fff7ed;border-color:#ea580c;color:#ea580c">万事达专区</a><a href="#platforms" style="background:#f0fdf4;border-color:#16a34a;color:#16a34a">平台支付</a><a href="#tactics">用卡策略</a><a href="#monthly-plan">月度额度</a><a href="#annual-fees">年费管理</a><a href="#time-strategy">时间策略</a><a href="#optimize" style="background:#fef2f2;border-color:#dc2626;color:#dc2626">精简置换</a>
+</div>
+
+<!-- 今日刷卡计划横幅 -->
+<div class="daily-plan" id="dailyPlan">
+  <div class="daily-plan-inner">
+    <div class="daily-plan-hd">
+      <h3>📋 今日刷卡计划 <span class="dp-date" id="dpDate"></span></h3>
+      <button class="daily-plan-close" onclick="document.getElementById('dailyPlan').classList.remove('show')">×</button>
+    </div>
+    <div class="dp-cards" id="dpCards"></div>
+  </div>
 </div>
 
 <!-- ===== 快速速查表 ===== -->
