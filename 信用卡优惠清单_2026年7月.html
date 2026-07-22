@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年7月 · 信用卡优惠攻略清单</title>
+<style>
+  :root {
+    --bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text: #2c3e50;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --tag-bg: #f3f4f6;
+    --tag-text: #4b5563;
+    --badge-hot: #ef4444;
+    --badge-bg: #fef2f2;
+    --section-border: #d1d5db;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+  }
+
+  /* header */
+  .hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+    color: #fff;
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+  .hero p  { font-size: 15px; opacity: .85; }
+  .hero .date { display: inline-block; margin-top: 12px; background: rgba(255,255,255,.15); padding: 4px 16px; border-radius: 20px; font-size: 13px; }
+
+  /* main layout */
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  /* nav */
+  .nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+  .nav a { 
+    padding: 8px 18px; border-radius: 20px; font-size: 14px; font-weight: 500; 
+    text-decoration: none; color: var(--muted); background: #fff; border: 1px solid var(--border);
+    transition: all .2s;
+  }
+  .nav a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+  /* section */
+  .section { margin-bottom: 48px; }
+  .section-title {
+    font-size: 22px; font-weight: 700; padding-bottom: 12px;
+    border-bottom: 2px solid var(--section-border); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title .icon { font-size: 24px; }
+
+  /* card */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.06); }
+
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+  .card-bank { font-size: 16px; font-weight: 700; }
+  .card-bank .tag { 
+    display: inline-block; margin-left: 8px; padding: 2px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 600; vertical-align: middle;
+  }
+  .tag-hot { background: var(--badge-bg); color: var(--badge-hot); }
+  .tag-new { background: #f0fdf4; color: #16a34a; }
+
+  .card-desc { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+
+  .deal-list { list-style: none; display: grid; gap: 8px; }
+  .deal-list li { 
+    display: flex; align-items: baseline; gap: 8px; font-size: 14px;
+    padding: 8px 12px; background: var(--accent-light); border-radius: 8px;
+    border-left: 3px solid var(--accent);
+  }
+  .deal-list li .emoji { flex-shrink: 0; font-size: 15px; width: 22px; text-align: center; }
+  .deal-list li .label { font-weight: 600; color: var(--accent); white-space: nowrap; }
+  .deal-list li .detail { color: var(--text); }
+
+  .card-footer { margin-top: 14px; font-size: 12px; color: var(--muted); display: flex; gap: 16px; flex-wrap: wrap; }
+  .card-footer span { display: flex; align-items: center; gap: 4px; }
+
+  /* category badges */
+  .cats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .cat { font-size: 12px; padding: 3px 10px; background: var(--tag-bg); color: var(--tag-text); border-radius: 10px; }
+
+  /* two col for international */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* tips */
+  .tips-box {
+    background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 20px 24px;
+    margin-top: 40px;
+  }
+  .tips-box h3 { font-size: 16px; margin-bottom: 12px; }
+  .tips-box ul { padding-left: 20px; }
+  .tips-box li { margin-bottom: 6px; font-size: 14px; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  .footer-note { text-align: center; font-size: 12px; color: var(--muted); margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>信用卡优惠攻略清单</h1>
+  <p>覆盖境内餐饮·出行·购物 & 境外返现·积分权益</p>
+  <span class="date">更新于 2026年7月 · 数据来源多渠道整理</span>
+</div>
+
+<div class="container">
+
+<!-- NAV -->
+<div class="nav">
+  <a href="#domestic">境内消费</a>
+  <a href="#overseas">境外返现</a>
+  <a href="#international">国际卡推荐</a>
+  <a href="#tips">用卡技巧</a>
+</div>
+
+<!-- ============ 境内消费 ============ -->
+<h2 class="section-title" id="domestic"><span class="icon">🏠</span> 一、境内日常消费优惠</h2>
+
+<!-- 招商银行 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">招商银行 <span class="tag tag-hot">热门</span></div>
+  </div>
+  <div class="cats"><span class="cat">餐饮</span><span class="cat">购物</span></div>
+  <p class="card-desc">掌上生活APP，招行信用卡用户覆盖面最广的生活优惠平台。</p>
+  <ul class="deal-list">
+    <li><span class="emoji">🍽️</span><span class="label">周三5折饭票</span><span class="detail">每周三掌上生活领5折券，覆盖火锅/西餐/奶茶，每月每商户限1次</span></li>
+    <li><span class="emoji">🎁</span><span class="label">笔笔抽红包</span><span class="detail">每笔消费可抽奖，随机获得刷卡金/积分/优惠券</span></li>
+    <li><span class="emoji">🎬</span><span class="label">影票优惠</span><span class="detail">掌上生活购电影票享折扣，新片上映常有9.9元起活动</span></li>
+  </ul>
+  <div class="card-footer"><span>📱 入口：掌上生活APP → 美食/影票</span></div>
+</div>
+
+<!-- 交通银行 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">交通银行 <span class="tag tag-hot">热门</span></div>
+  </div>
+  <div class="cats"><span class="cat">餐饮</span><span class="cat">加油</span><span class="cat">超市</span><span class="cat">外卖</span></div>
+  <p class="card-desc">"最红星期五"王牌IP + "百县万店"下沉覆盖，优惠场景最全。</p>
+  <ul class="deal-list">
+    <li><span class="emoji">🍕</span><span class="label">周五餐饮5折起</span><span class="detail">每周五指定餐饮商户5折/满减，直通场100%有奖</span></li>
+    <li><span class="emoji">⛽</span><span class="label">加油5折</span><span class="detail">周五加油站满减，覆盖中石油/中石化等</span></li>
+    <li><span class="emoji">🛒</span><span class="label">超市满减</span><span class="detail">周五超市/商超购物享折扣</span></li>
+    <li><span class="emoji">☕</span><span class="label">88惠饮季</span><span class="detail">8.8元买咖啡/奶茶代金券（星巴克、瑞幸等）</span></li>
+    <li><span class="emoji">🐾</span><span class="label">宠物专区</span><span class="detail">买单吧爱宠专区50减25红包，覆盖宠物食品/用品</span></li>
+    <li><span class="emoji">🎫</span><span class="label">月月领好礼</span><span class="detail">每月领打车券/景区门票抵扣金/餐饮红包</span></li>
+  </ul>
+  <div class="card-footer"><span>📱 入口：买单吧APP → 最红星期五 | ⏰ 至2026年9月</span></div>
+</div>
+
+<!-- 农业银行 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">农业银行 <span class="tag tag-hot">热门</span></div>
+  </div>
+  <div class="cats"><span class="cat">加油</span><span class="cat">电商</span><span class="cat">外卖</span></div>
+  <p class="card-desc">门槛亲民，加油和线上购物覆盖广，7月活动密集。</p>
+  <ul class="deal-list">
+    <li><span class="emoji">⛽</span><span class="label">加油满200减15</span><span class="detail">62开头农行信用卡，中石油/中石化满200减15，月限1次（需上月消费满3000）</span></li>
+    <li><span class="emoji">🔋</span><span class="label">充电返现</span><span class="detail">新能源充电满30元至高返6元</span></li>
+    <li><span class="emoji">📱</span><span class="label">抖音满200随机减</span><span class="detail">抖音支付满200随机减至高28元</span></li>
+    <li><span class="emoji">🛵</span><span class="label">美团首绑立减</span><span class="detail">美团旗下APP首绑随机立减至高18元</span></li>
+    <li><span class="emoji">✈️</span><span class="label">去哪儿分期满减</span><span class="detail">分期消费满300减10 / 满500减20 / 满1000减30 / 满2000减50</span></li>
+    <li><span class="emoji">🎰</span><span class="label">天天返现达标礼</span><span class="detail">报名后消费达标可抽最高666元刷卡金</span></li>
+  </ul>
+  <div class="card-footer"><span>📱 入口：农行掌银APP → 信用卡 → 优惠 | ⏰ 7月-9月</span></div>
+</div>
+
+<!-- 中信银行 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">中信银行 <span class="tag tag-hot">热门</span></div>
+  </div>
+  <div class="cats"><span class="cat">餐饮</span><span class="cat">购物</span><span class="cat">加油</span></div>
+  <p class="card-desc">"精彩365"日常支付满减力度大，覆盖商户广。</p>
+  <ul class="deal-list">
+    <li><span class="emoji">🍗</span><span class="label">肯德基满20随机减</span><span class="detail">微信支付满20随机立减最高5元，每日名额6千</span></li>
+    <li><span class="emoji">🛍️</span><span class="label">屈臣氏/名创满50减</span><span class="detail">微信支付满50随机减最高10元</span></li>
+    <li><span class="emoji">🍲</span><span class="label">海底捞满200减</span><span class="detail">微信支付满200随机立减最高88元</span></li>
+    <li><span class="emoji">⛽</span><span class="label">中石化满200减</span><span class="detail">支付宝"易捷加油"满200随机减最高88元，每日名额3千</span></li>
+    <li><span class="emoji">☕</span><span class="label">6元星巴克</span><span class="detail">动卡空间专享，6元购星巴克饮品券</span></li>
+    <li><span class="emoji">🍽️</span><span class="label">正餐满200减30-88</span><span class="detail">365品质生活，覆盖宜家/华润万家/Metro等</span></li>
+  </ul>
+  <div class="card-footer"><span>📱 入口：动卡空间APP → 优惠·积分 | ⏰ 每日10点起，至2026/12/31</span></div>
+</div>
+
+<!-- 中国银行 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">中国银行</div>
+  </div>
+  <div class="cats"><span class="cat">综合</span><span class="cat">分期</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">🎁</span><span class="label">消费达标抽立减金</span><span class="detail">7月累计消费达标抽微信立减金：消费1万→最高99元，3万→最高399元，5万→最高999元</span></li>
+    <li><span class="emoji">💳</span><span class="label">分期折扣</span><span class="detail">账单分期利率低至3折，新客1折，现金分期低至2折起</span></li>
+  </ul>
+  <div class="card-footer"><span>📱 入口：中国银行APP | ⏰ 7月1日-31日</span></div>
+</div>
+
+<!-- 广发银行 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">广发银行</div>
+  </div>
+  <div class="cats"><span class="cat">餐饮</span><span class="cat">新户</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">🍽️</span><span class="label">超级广发日</span><span class="detail">周五5折饭票，覆盖全国餐饮商户</span></li>
+    <li><span class="emoji">🎁</span><span class="label">新户礼</span><span class="detail">新户达标享丰厚开卡礼</span></li>
+  </ul>
+  <div class="card-footer"><span>📱 入口：发现精彩APP → 超级广发日</span></div>
+</div>
+
+<!-- 工商银行 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">工商银行</div>
+  </div>
+  <div class="cats"><span class="cat">餐饮</span><span class="cat">出行</span><span class="cat">免税</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">🍜</span><span class="label">美食刮刮乐</span><span class="detail">每日9:30起抽奖，至高38元刷卡金（至7月31日）</span></li>
+    <li><span class="emoji">🚕</span><span class="label">打车刮刮乐</span><span class="detail">刮5元/8元刷卡金（至7月31日）</span></li>
+    <li><span class="emoji">🛍️</span><span class="label">爱购中免立减200</span><span class="detail">62开头银联卡在中免消费立减200元</span></li>
+  </ul>
+  <div class="card-footer"><span>📱 入口：工银e生活APP</span></div>
+</div>
+
+<!-- 浦发银行 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">浦发银行</div>
+  </div>
+  <div class="cats"><span class="cat">电商</span><span class="cat">外卖</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">📦</span><span class="label">京东PLUS满减</span><span class="detail">京东购物使用浦发信用卡支付享满减</span></li>
+    <li><span class="emoji">🛵</span><span class="label">美团外卖满30减8</span><span class="detail">浦大喜奔APP → 电商专区，美团外卖满减</span></li>
+  </ul>
+  <div class="card-footer"><span>📱 入口：浦大喜奔APP → 电商专区</span></div>
+</div>
+
+<!-- 民生银行 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">民生银行</div>
+  </div>
+  <div class="cats"><span class="cat">综合</span><span class="cat">返现</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">🎉</span><span class="label">惠买单周年庆</span><span class="detail">连续八天限时好礼（至7月31日）</span></li>
+    <li><span class="emoji">💰</span><span class="label">消费金天天领</span><span class="detail">消费达标赢6666元还款金（至7月4日）</span></li>
+  </ul>
+  <div class="card-footer"><span>📱 入口：民生银行APP / 全民生活APP</span></div>
+</div>
+
+<!-- ============ 境外返现 ============ -->
+<h2 class="section-title" id="overseas"><span class="icon">🌏</span> 二、境外消费返现 & 留学缴费</h2>
+
+<!-- 工商银行 境外 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">工商银行 · 境外 <span class="tag tag-hot">大额首选</span></div>
+  </div>
+  <div class="cats"><span class="cat">返现</span><span class="cat">留学</span><span class="cat">无上限</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">💎</span><span class="label">爱购全球大额返现</span><span class="detail">单笔等值人民币3000元以上部分享10%返现，每卡每月上限100元（至2026/3/31）</span></li>
+    <li><span class="emoji">🔄</span><span class="label">Visa星座卡 1%无上限</span><span class="detail">笔笔返1%，无上限！（至2026/10/31）——市场上极少数无上限返现产品</span></li>
+    <li><span class="emoji">🎓</span><span class="label">留学缴费6%返现</span><span class="detail">62开头银联卡，境外留学缴费超2万元部分享6%返现，每月至高1500元</span></li>
+    <li><span class="emoji">🌟</span><span class="label">万事达卡至高10%返现</span><span class="detail">境外消费刷万事达卡，至高10%返现（至2027/3/31）</span></li>
+  </ul>
+  <div class="card-footer"><span>🏦 工行 | 银联+Visa+万事达全覆盖</span></div>
+</div>
+
+<!-- 中信 境外 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">中信银行 · 境外 <span class="tag tag-hot">多场景</span></div>
+  </div>
+  <div class="cats"><span class="cat">万事达</span><span class="cat">商旅</span><span class="cat">教育</span><span class="cat">乐园</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">💳</span><span class="label">笔笔返</span><span class="detail">万事达卡境外消费笔笔返，月上限30美元</span></li>
+    <li><span class="emoji">🏆</span><span class="label">高额返</span><span class="detail">月上限200美元</span></li>
+    <li><span class="emoji">✈️</span><span class="label">商旅返</span><span class="detail">月上限50美元</span></li>
+    <li><span class="emoji">🏫</span><span class="label">教育返</span><span class="detail">月上限100美元</span></li>
+    <li><span class="emoji">🎢</span><span class="label">全球乐园返</span><span class="detail">月上限20美元</span></li>
+    <li><span class="emoji">📊</span><span class="label">合计月返</span><span class="detail">全部叠加最高450美元/月</span></li>
+  </ul>
+  <div class="card-footer"><span>🏦 中信万事达卡 | 需报名 | ⏰ 至2026/12/31</span></div>
+</div>
+
+<!-- 建设银行 境外 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">建设银行 · 境外</div>
+  </div>
+  <div class="cats"><span class="cat">银联</span><span class="cat">日本</span><span class="cat">留学</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">🔄</span><span class="label">正青春卡笔笔返1%</span><span class="detail">银联境外线下+线上，单笔满1元即返1%（至2026/4/30）</span></li>
+    <li><span class="emoji">🇯🇵</span><span class="label">日韩澳新双倍返</span><span class="detail">日本/韩国/澳大利亚/新西兰/新加坡额外+1%，即2%返现，单卡月上限1500元</span></li>
+    <li><span class="emoji">🎓</span><span class="label">留学缴费8%返现</span><span class="detail">银联境外留学教育类商户消费享8%返现，每月每客户1000元封顶（至2026/2/28）</span></li>
+    <li><span class="emoji">🛍️</span><span class="label">境外线下8%返现</span><span class="detail">二季度专享境外线下8%返现活动</span></li>
+  </ul>
+  <div class="card-footer"><span>🏦 建行银联卡</span></div>
+</div>
+
+<!-- 中国银行 境外 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">中国银行 · 境外</div>
+  </div>
+  <div class="cats"><span class="cat">银联</span><span class="cat">线下</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">🌐</span><span class="label">银联境外线下笔笔返3%</span><span class="detail">"环球精彩"银联境外线下消费笔笔返消费金3%（至2026/12/31）</span></li>
+    <li><span class="emoji">🎯</span><span class="label">越刷越返</span><span class="detail">消费达标至高领999元立减券（需报名）</span></li>
+  </ul>
+  <div class="card-footer"><span>🏦 中国银行银联卡</span></div>
+</div>
+
+<!-- 上海银行 境外 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">上海银行 · 境外</div>
+  </div>
+  <div class="cats"><span class="cat">Visa</span><span class="cat">运通</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">💎</span><span class="label">Visa返现至高10%</span><span class="detail">境外消费报名享至高10%返现（至2026/8/31，需独立报名）</span></li>
+    <li><span class="emoji">🎫</span><span class="label">运通卡境外2%返现</span><span class="detail">指定运通卡境外线下消费达标享2%返现+京东权益（至2027/1/31）</span></li>
+    <li><span class="emoji">🦁</span><span class="label">上海野生动物园</span><span class="detail">门票最高满减18元</span></li>
+  </ul>
+  <div class="card-footer"><span>🏦 上海银行 Visa/运通</span></div>
+</div>
+
+<!-- 华夏 境外 -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">华夏银行 · 境外</div>
+  </div>
+  <div class="cats"><span class="cat">返现</span><span class="cat">新户</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">🔄</span><span class="label">境外线下笔笔返</span><span class="detail">达标最高返现10%（至2026/8/31）</span></li>
+    <li><span class="emoji">🎁</span><span class="label">新户最高210元代金券</span><span class="detail">7月起新户专享</span></li>
+  </ul>
+  <div class="card-footer"><span>🏦 华夏银行 | 至2026/8/31</span></div>
+</div>
+
+<!-- ============ 国际卡推荐 ============ -->
+<h2 class="section-title" id="international"><span class="icon">🌍</span> 三、国际信用卡推荐（境外/海外用户参考）</h2>
+
+<div class="grid-2">
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">Chase Sapphire Preferred <span class="tag tag-hot">旅行首选</span></div>
+  </div>
+  <div class="cats"><span class="cat">旅行</span><span class="cat">餐饮</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">✈️</span><span class="label">5x 旅行积分</span><span class="detail">Chase Travel平台预订5倍积分</span></li>
+    <li><span class="emoji">🍽️</span><span class="label">3x 餐饮</span><span class="detail">全球餐厅3倍积分（含外卖）</span></li>
+    <li><span class="emoji">🎁</span><span class="label">开卡奖励</span><span class="detail">75,000积分（价值$937+）</span></li>
+    <li><span class="emoji">🔄</span><span class="label">1:1转点</span><span class="detail">可1:1转至14家航空/酒店（United, Hyatt, Southwest等）</span></li>
+  </ul>
+  <div class="card-footer"><span>年费 $95 | 适合年旅行2次+、月消费$1000+</span></div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">Amex Gold <span class="tag tag-hot">餐饮王者</span></div>
+  </div>
+  <div class="cats"><span class="cat">餐饮</span><span class="cat">超市</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">🍽️</span><span class="label">4x 餐饮</span><span class="detail">全球餐厅4倍积分</span></li>
+    <li><span class="emoji">🛒</span><span class="label">4x 超市</span><span class="detail">美国超市4倍（年上限$25k）</span></li>
+    <li><span class="emoji">✈️</span><span class="label">3x 机票</span><span class="detail">航司官网直订3倍</span></li>
+    <li><span class="emoji">💰</span><span class="label">年度抵扣</span><span class="detail">$240餐饮券 + $120 Uber Cash/年</span></li>
+  </ul>
+  <div class="card-footer"><span>年费 $325 | 适合月餐饮+超市消费$800+</span></div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">Citi Double Cash</div>
+  </div>
+  <div class="cats"><span class="cat">返现</span><span class="cat">无脑刷</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">💵</span><span class="label">2% 统一返现</span><span class="detail">所有消费统一2%返现（买时1%+还款1%）</span></li>
+    <li><span class="emoji">🆓</span><span class="label">0年费</span><span class="detail">无年费，无脑持有</span></li>
+    <li><span class="emoji">🎁</span><span class="label">开卡奖励</span><span class="detail">消费$1500返$200</span></li>
+  </ul>
+  <div class="card-footer"><span>年费 $0 | 适合不想记类别的懒人</span></div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">Capital One Savor</div>
+  </div>
+  <div class="cats"><span class="cat">餐饮</span><span class="cat">娱乐</span><span class="cat">超市</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">🍽️</span><span class="label">3% 餐饮</span><span class="detail">餐饮/娱乐/流媒体 3%返现</span></li>
+    <li><span class="emoji">🛒</span><span class="label">3% 超市</span><span class="detail">超市消费3%返现（不含沃尔玛/塔吉特）</span></li>
+    <li><span class="emoji">🆓</span><span class="label">0年费</span><span class="detail">无年费高返现</span></li>
+  </ul>
+  <div class="card-footer"><span>年费 $0 | 适合餐饮娱乐消费多的用户</span></div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">Wells Fargo Active Cash</div>
+  </div>
+  <div class="cats"><span class="cat">返现</span><span class="cat">0%分期</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">💵</span><span class="label">2% 统一返现</span><span class="detail">所有消费统一2%返现</span></li>
+    <li><span class="emoji">🎁</span><span class="label">开卡奖励</span><span class="detail">消费$500返$200（门槛极低）</span></li>
+    <li><span class="emoji">⏳</span><span class="label">0% APR 12个月</span><span class="detail">新卡12个月0%购物分期</span></li>
+  </ul>
+  <div class="card-footer"><span>年费 $0 | 大额消费分期首选</span></div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-bank">Chase Freedom Unlimited</div>
+  </div>
+  <div class="cats"><span class="cat">综合</span><span class="cat">药妆</span></div>
+  <ul class="deal-list">
+    <li><span class="emoji">✈️</span><span class="label">5% 旅行</span><span class="detail">Chase Travel 5%返现</span></li>
+    <li><span class="emoji">💊</span><span class="label">3% 药妆+餐饮</span><span class="detail">药店+餐厅3%返现</span></li>
+    <li><span class="emoji">💵</span><span class="label">1.5% 通用</span><span class="detail">其余所有消费1.5%返现</span></li>
+    <li><span class="emoji">🎁</span><span class="label">开卡$200</span><span class="detail">消费$500返$200</span></li>
+  </ul>
+  <div class="card-footer"><span>年费 $0 | 与Sapphire搭配极佳</span></div>
+</div>
+
+</div><!-- grid-2 -->
+
+<!-- ============ 用卡技巧 ============ -->
+<div class="tips-box" id="tips">
+  <h3>用卡小贴士</h3>
+  <ul>
+    <li><strong>餐饮消费</strong>：招行周三5折 + 交行周五5折，配合使用覆盖一周；日常用中信满减。</li>
+    <li><strong>加油刚需</strong>：农行满200减15 + 交行周五加油5折 + 中信中石化满200随机减，三卡轮换。</li>
+    <li><strong>境外出行</strong>：大额消费用工行爱购全球10%返现；日常消费用工行Visa星座卡1%无上限；留学缴费用工行6%或建行8%。</li>
+    <li><strong>无脑刷</strong>：不想记规则就用交行/中信，日常支付都有随机立减或积分。</li>
+    <li><strong>叠加策略</strong>：大部分银行优惠可与商户自身活动叠加（如美团红包+农行立减），效果翻倍。</li>
+    <li><strong>报名提醒</strong>：工行/建行/中行/上海银行境外返现大多需要提前报名，出行前记得操作。</li>
+  </ul>
+</div>
+
+<div class="footer-note">
+  数据来源：飞客网、各银行官网、卡优新闻网、Money101、Bankrate等，截至2026年7月。优惠信息可能随时调整，以银行最新公告为准。
+</div>
+
+</div><!-- container -->
+
+</body>
+</html>
