@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的信用卡优惠清单 · 2026年7月</title>
+<style>
+  :root {
+    --bg: #f5f6f8; --card-bg: #fff; --text: #1e293b; --muted: #64748b;
+    --border: #e2e8f0; --accent: #2563eb; --accent-light: #eff6ff;
+    --tag-bg: #f1f5f9; --tag-text: #475569;
+    --hot: #ef4444; --hot-bg: #fef2f2;
+    --green: #16a34a; --green-bg: #f0fdf4;
+    --orange: #ea580c; --orange-bg: #fff7ed;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.7; padding-bottom: 60px;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
+    color: #fff; padding: 40px 24px 36px; text-align: center;
+  }
+  .hero h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+  .hero p  { font-size: 14px; opacity: .8; }
+  .hero .bags { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .hero .bags span {
+    font-size: 12px; padding: 4px 12px; background: rgba(255,255,255,.12);
+    border-radius: 14px; font-weight: 500;
+  }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 28px 18px; }
+
+  /* toc */
+  .toc {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 36px;
+  }
+  .toc a {
+    padding: 7px 16px; border-radius: 18px; font-size: 13px; font-weight: 500;
+    text-decoration: none; color: var(--muted); background: #fff; border: 1px solid var(--border);
+    transition: .2s;
+  }
+  .toc a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+  /* card */
+  .bank-card {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+    padding: 22px 24px; margin-bottom: 14px;
+    border-left: 4px solid var(--accent); transition: box-shadow .2s;
+  }
+  .bank-card:hover { box-shadow: 0 3px 14px rgba(0,0,0,.05); }
+  .bank-card.star { border-left-color: #f59e0b; }
+  .bank-card.travel { border-left-color: #8b5cf6; }
+
+  .bank-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .bank-name { font-size: 17px; font-weight: 700; }
+  .bank-name .badge {
+    display: inline-block; margin-left: 8px; padding: 2px 10px; border-radius: 10px;
+    font-size: 11px; font-weight: 600; vertical-align: middle;
+  }
+  .badge-hot  { background: var(--hot-bg); color: var(--hot); }
+  .badge-new  { background: var(--green-bg); color: var(--green); }
+  .badge-fuel { background: var(--orange-bg); color: var(--orange); }
+
+  .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+  .tag { font-size: 11px; padding: 2px 9px; background: var(--tag-bg); color: var(--tag-text); border-radius: 8px; }
+
+  .deals { list-style: none; display: grid; gap: 6px; }
+  .deals li {
+    display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px;
+    padding: 7px 12px; background: var(--accent-light); border-radius: 8px;
+  }
+  .deals li .ico { flex-shrink: 0; font-size: 15px; width: 22px; text-align: center; margin-top: 1px; }
+  .deals li .lbl { font-weight: 600; color: var(--accent); white-space: nowrap; }
+  .deals li .dtl { color: var(--text); }
+
+  .bank-ft { margin-top: 12px; font-size: 11.5px; color: var(--muted); display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* tips */
+  .tips {
+    background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 20px 24px;
+    margin-top: 32px;
+  }
+  .tips h3 { font-size: 15px; margin-bottom: 10px; }
+  .tips ul { padding-left: 20px; font-size: 14px; display: grid; gap: 5px; }
+
+  /* summary table */
+  .summary { margin-bottom: 36px; }
+  .summary h3 { font-size: 16px; margin-bottom: 12px; }
+  .summary table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .summary th, .summary td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  .summary th { background: #f8fafc; font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .5px; }
+  .summary td { background: #fff; }
+  .summary .hl { font-weight: 600; color: var(--accent); }
+
+  .footnote { text-align: center; font-size: 11px; color: var(--muted); margin-top: 32px; }
+
+  /* 回到顶部按钮 */
+  #back-top {
+    position: fixed; bottom: 32px; right: 32px;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent); color: #fff; border: none;
+    font-size: 20px; cursor: pointer; box-shadow: 0 4px 14px rgba(37,99,235,.35);
+    opacity: 0; transform: translateY(16px);
+    transition: opacity .3s, transform .3s;
+    z-index: 999; display: flex; align-items: center; justify-content: center;
+  }
+  #back-top.show { opacity: 1; transform: translateY(0); }
+  #back-top:hover { background: #1d4ed8; transform: translateY(-2px); }
+  #back-top.show:hover { transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>我的信用卡优惠攻略</h1>
+  <p>按手中持有的 9 行卡片定制 · 2026年7月有效</p>
+  <div class="bags">
+    <span>邮储</span><span>中行</span><span>农行</span><span>工行</span><span>建行</span>
+    <span>光大</span><span>广发</span><span>浦发</span><span>平安</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- TOC -->
+<div class="toc">
+  <a href="#psbc">邮储</a><a href="#boc">中行</a><a href="#abc">农行</a>
+  <a href="#icbc">工行</a><a href="#ccb">建行</a><a href="#ceb">光大</a>
+  <a href="#cgb">广发</a><a href="#spdb">浦发</a><a href="#pingan">平安</a>
+  <a href="#matrix">快速速查表</a><a href="#points">积分活动</a><a href="#roi">回报率</a><a href="#daily">每日活动</a><a href="#tactics">用卡策略</a><a href="#monthly-plan">月度额度</a>
+</div>
+
+<!-- ===== 快速速查表 ===== -->
+<div class="summary" id="matrix">
+  <h3>一图速览 · 每张卡最适合刷什么场景</h3>
+  <table>
+    <tr><th>银行</th><th>最佳场景</th><th>核心优惠</th></tr>
+    <tr><td>邮储</td><td>高端权益/日常返现</td><td class="hl">青春卡1%兑换点、鼎致白高端权益</td></tr>
+    <tr><td>中行</td><td>大额消费、分期</td><td class="hl">消费达标抽最高999元立减金</td></tr>
+    <tr><td>农行</td><td>高端出行(尊然白) / 加油洗车(车主卡) / 茶咖(悦卡)</td><td class="hl">尊然白：贵宾厅+接送机+25:1里程 | 畅享版加油200-20 | 悦卡消费达标兑</td></tr>
+    <tr><td>工行</td><td>日常满减 + 长隆5折</td><td class="hl">每周各场景满减 + 长隆各大乐园门票5折</td></tr>
+    <tr><td>建行</td><td>欢享卡笔笔返现+建行生活</td><td class="hl">笔笔满10返0.1~99元(月30次) + 每日主题日全覆盖</td></tr>
+    <tr><td>光大</td><td>加油、代驾、贵宾厅</td><td class="hl">微信/支付宝4倍积分(1.11%) + 月刷月开心加油200-100</td></tr>
+    <tr><td>广发</td><td>日常返现 / 8号集中刷</td><td class="hl">多利卡美团/星巴克/奈雪10%返现 + 微信支付宝1%返现</td></tr>
+    <tr><td>浦发</td><td>京东、美团外卖</td><td class="hl">京东PLUS满减、美团满30-8</td></tr>
+    <tr><td>平安</td><td>悦享白·百变好礼月月享</td><td class="hl">月消费5笔18元→2张兑换券（视频会员/咖啡/外卖券）</td></tr>
+  </table>
+</div>
+
+<!-- ===== 邮储 ===== -->
+<div class="bank-card star" id="psbc">
+  <div class="bank-hd">
+    <div class="bank-name">邮储银行 <span class="badge badge-hot">3卡各有分工</span></div>
+  </div>
+  <div class="tags"><span class="tag">鼎致白</span><span class="tag">小绿卡</span><span class="tag">青春卡</span></div>
+  <ul class="deals">
+    <li><span class="ico">👑</span><span class="lbl">鼎致白金卡：高端权益担当</span><span class="dtl">年费2600元（20万积分可抵）。权益：6次/年悦途贵宾厅、2次接送机、1次体检、1次洁牙、无限道路救援、6次专家导诊+代驾。周六消费2倍积分（月上限5万分），积分永久有效。</span></li>
+    <li><span class="ico">🌍</span><span class="lbl">环球小绿卡白金卡：旅游场景</span><span class="dtl">年费500元（首免，刷7万/20笔免次年）。生日月双倍积分、分期双倍。4-6月消费6天礼已结束（领取期至7/31），下半年续期暂未公告。</span></li>
+    <li><span class="ico">🎓</span><span class="lbl">青春卡银联：消费返现1%</span><span class="dtl">不计积分！微信/支付宝/线下计积分商户消费按1%累计兑换点（T+1到账，365天有效）。1000消费=5元饿了么/滴滴券，1500消费=30元视频月卡。活动至2026/12/31。</span></li>
+    <li><span class="ico">⛽</span><span class="lbl">全卡共用：中石化立减</span><span class="dtl">易捷加油APP，首绑邮储信用卡满200减15；每月随机减3-66元（至2027/3/31）</span></li>
+    <li><span class="ico">🏪</span><span class="lbl">全卡共用：支付宝天天减</span><span class="dtl">支付宝满50减5（月限1次）、满10减1（月限6次/日限1次），覆盖线下合作商户（至8/20）</span></li>
+    <li><span class="ico">📅</span><span class="lbl">全卡共用：周周享</span><span class="dtl">肯德基消费6天礼：当月满6天（每天≥9.9元）领6元支付宝券，月最多2次（至7/31）。周六5折：上月消费满6000，领25元券。</span></li>
+  </ul>
+  <div class="bank-ft"><span>📱 入口：邮储银行APP → 信用卡 | 鼎致白客服热线：400-898-8888</span></div>
+</div>
+
+<!-- ===== 中行 ===== -->
+<div class="bank-card" id="boc">
+  <div class="bank-hd">
+    <div class="bank-name">中国银行</div>
+  </div>
+  <div class="tags"><span class="tag">大额消费</span><span class="tag">分期</span><span class="tag">加油</span><span class="tag">支付宝</span></div>
+  <ul class="deals">
+    <li><span class="ico">🎁</span><span class="lbl">消费达标抽立减金</span><span class="dtl">7月累计消费满1万→最高99元 / 满3万→最高399元 / 满5万→最高999元</span></li>
+    <li><span class="ico">💳</span><span class="lbl">分期折扣</span><span class="dtl">账单分期利率低至3折，新客1折，现金分期低至2折起</span></li>
+    <li><span class="ico">⛽</span><span class="lbl">加油9.2折</span><span class="dtl">中石化加油用支付宝绑中行卡，单笔最高减24元（月限1次，部分地区）</span></li>
+    <li><span class="ico">🎯</span><span class="lbl">越刷越返</span><span class="dtl">月消费达标至高领999元立减券（需报名）</span></li>
+  </ul>
+  <div class="bank-ft"><span>📱 入口：中国银行APP | ⏰ 7月1日-31日</span></div>
+</div>
+
+<!-- ===== 农行 ===== -->
+<div class="bank-card star" id="abc">
+  <div class="bank-hd">
+    <div class="bank-name">农业银行 <span class="badge badge-hot">5卡各司其职</span></div>
+  </div>
+  <div class="tags"><span class="tag">尊然白</span><span class="tag">超然商务卡</span><span class="tag">车主尊享版</span><span class="tag">车主畅享版</span><span class="tag">悦卡</span></div>
+
+  <h4 style="margin:0 0 8px;font-size:13px;color:#6366f1">👑 尊然白金卡（万事达） — 高端出行担当</h4>
+  <ul class="deals">
+    <li><span class="ico">🛋️</span><span class="lbl">全年6次境内机场贵宾厅</span><span class="dtl">覆盖全国30+省市，激活首刷2日后可用。积分可再兑3次（6万分/次）。</span></li>
+    <li><span class="ico">🚗</span><span class="lbl">积分兑换接送机 12次/年</span><span class="dtl">10万积分兑1次境内接送机，覆盖国内主流机场。数量有限先到先得。</span></li>
+    <li><span class="ico">🏥</span><span class="lbl">全年3次专家预约挂号+陪诊</span><span class="dtl">三甲医院专家推荐+预约挂号+全程陪同就诊，取号/划价/取药一站式服务。</span></li>
+    <li><span class="ico">🛟</span><span class="lbl">全年无限次24h道路救援</span><span class="dtl">拖车/换胎/送油/基础故障检修，覆盖全国1000+城市。</span></li>
+    <li><span class="ico">🛡️</span><span class="lbl">保险保障</span><span class="dtl">最高1000万公共交通意外险 + 96小时5万元盗失险 + 航空延误险（2小时起赔，最高300元/次）</span></li>
+    <li><span class="ico">🎁</span><span class="lbl">开卡礼（7-9月）</span><span class="dtl">首次办卡消费满5888元达标领开卡礼四选一，限量2000份</span></li>
+    <li><span class="ico">🏨</span><span class="lbl">消费达标礼</span><span class="dtl">消费达标享优惠价预定高端酒店（香格里拉/希尔顿/洲际/万豪等），覆盖120城500+酒店</span></li>
+    <li><span class="ico">💳</span><span class="lbl">年费</span><span class="dtl">880元/年，10万积分可抵扣主卡年费。附属卡500元/年，5万积分可抵。</span></li>
+  </ul>
+
+  <h4 style="margin:12px 0 8px;font-size:13px;color:#8b5cf6">💼 万事达超然商务卡 — 商旅+境外返现</h4>
+  <ul class="deals">
+    <li><span class="ico">🆓</span><span class="lbl">有效期内免年费!</span><span class="dtl">零年费压力，适合做农行"火种卡"长期持有。</span></li>
+    <li><span class="ico">🌐</span><span class="lbl">境外消费免货币转换费</span><span class="dtl">万事达通道，境外消费免1.5%货币转换费 + 笔笔返现活动（需报名）</span></li>
+    <li><span class="ico">✈️</span><span class="lbl">消费达标抢"两票"</span><span class="dtl">消费满2万→260元高铁券 / 5万→境外贵宾厅 / 12万→800元机票券 / 20万→境外租车券。需每周一抢，先到先得。</span></li>
+    <li><span class="ico">🏢</span><span class="lbl">企业差旅服务</span><span class="dtl">支持差旅预订报销全流程，适合商务人士</span></li>
+  </ul>
+
+  <h4 style="margin:12px 0 8px;font-size:13px;color:#ea580c">🚗 车主白金卡尊享版 — 里程降级，权益仍在</h4>
+  <ul class="deals">
+    <li><span class="ico">⚠️</span><span class="lbl">2026.3起里程降为40:1</span><span class="dtl">不再享受高端25:1兑换比例，积分价值大降。叠加5倍包后≈6.67:1。</span></li>
+    <li><span class="ico">🧽</span><span class="lbl">1元洗车 1次/月</span><span class="dtl">优惠金额至高40元，名额有限先到先得（至9/30）</span></li>
+    <li><span class="ico">🍺</span><span class="lbl">1元代驾 1次/季</span><span class="dtl">优惠金额至高80元，名额有限先到先得（全年有效）</span></li>
+    <li><span class="ico">🅿️</span><span class="lbl">停车5折 1次/月</span><span class="dtl">每次优惠至高5元（至9/30）</span></li>
+    <li><span class="ico">🛟</span><span class="lbl">全年6次免费道路救援</span><span class="dtl">覆盖全国，7×24h</span></li>
+    <li><span class="ico">💳</span><span class="lbl">年费</span><span class="dtl">580元/年，首年免，消费满3万免次年</span></li>
+  </ul>
+
+  <h4 style="margin:12px 0 8px;font-size:13px;color:#16a34a">⛽ 车主卡畅享版 — 加油/充电实惠之选</h4>
+  <ul class="deals">
+    <li><span class="ico">🎁</span><span class="lbl">开卡礼（7-9月）</span><span class="dtl">首次办卡首刷即领：100元加油券 或 充电券包(4张25元)二选一。加油券22000张，充电包8000份。</span></li>
+    <li><span class="ico">⛽</span><span class="lbl">加油满200减20</span><span class="dtl">月消费满888元→次月8号起领1张加油券(满200-20)，满3888元再领1张。中石油/中石化云闪付使用。</span></li>
+    <li><span class="ico">🔋</span><span class="lbl">充电满30减20</span><span class="dtl">同上达标条件，可在加油/充电券之间二选一。比加油更划算!（66折 vs 9折）</span></li>
+    <li><span class="ico">🧽</span><span class="lbl">1元洗车 1次/月</span><span class="dtl">至高40元优惠（至6/30，续期待公告）</span></li>
+    <li><span class="ico">🍺</span><span class="lbl">1元代驾 1次/季</span><span class="dtl">至高80元优惠</span></li>
+    <li><span class="ico">🛟</span><span class="lbl">全年6次免费道路救援</span><span class="dtl">首刷后即可享</span></li>
+    <li><span class="ico">💳</span><span class="lbl">年费</span><span class="dtl">160元/年</span></li>
+  </ul>
+
+  <h4 style="margin:12px 0 8px;font-size:13px;color:#8b5cf6">☕ 悦卡·悦享生活 — 消费达标月月兑</h4>
+  <ul class="deals">
+    <li><span class="ico">🎯</span><span class="lbl">消费达标月月兑（7-8月）</span><span class="dtl">月消费满888/1888/8888元，次月3日起领权益兑换码。888档10500份/月，1888档10000份/月，8888档9000份/月。兑视频会员/骑行卡/外卖券/咖啡券等。</span></li>
+    <li><span class="ico">☕</span><span class="lbl">茶咖1分购</span><span class="dtl">完成首笔消费后，每月1分钱领奈雪/喜茶/瑞幸代金券1张，每月15000份（至6/30，续期待公告）</span></li>
+    <li><span class="ico">🎁</span><span class="lbl">网点开卡礼（7-8月）</span><span class="dtl">指定网点办理激活后现场领60元奈雪代金券(20元×3张)，限量5000份</span></li>
+    <li><span class="ico">💳</span><span class="lbl">年费</span><span class="dtl">普卡等级，刷免</span></li>
+  </ul>
+
+  <div class="bank-ft"><span>📱 入口：农行掌银APP → 信用卡 → 优惠 | 5张卡分工：尊然白出行、超然商旅、车主卡养车、悦卡日常生活</span></div>
+</div>
+
+<!-- ===== 工行 ===== -->
+<div class="bank-card travel" id="icbc">
+  <div class="bank-hd">
+    <div class="bank-name">工商银行 · 长隆运通金卡（飞船版） <span class="badge badge-hot">长隆专属</span></div>
+  </div>
+  <div class="tags"><span class="tag">美国运通</span><span class="tag">长隆5折</span><span class="tag">免转换费</span><span class="tag">刷5笔免年费</span></div>
+  <ul class="deals">
+    <li><span class="ico">🎢</span><span class="lbl">长隆各大乐园门票5折</span><span class="dtl">每人每园享正价标准票5折1张！广州/珠海/清远长隆全园区通用。长隆旅游APP→会员→领5折券后购买。</span></li>
+    <li><span class="ico">🍽️</span><span class="lbl">长隆度假区内9折</span><span class="dtl">园区+酒店内指定自营餐饮、商店消费9折</span></li>
+    <li><span class="ico">👑</span><span class="lbl">自动匹配长隆金卡会员</span><span class="dtl">享生日当天乐园门票5折、酒店自助餐5折、大堂吧赠饮等会员权益</span></li>
+    <li><span class="ico">🎁</span><span class="lbl">达标0元领长隆"好朋友"</span><span class="dtl">消费达标后可0元领取长隆乐园"好朋友"门票1张（具体达标条件以活动页为准）</span></li>
+    <li><span class="ico">🌐</span><span class="lbl">境外消费免货币转换费</span><span class="dtl">美国运通单品牌，人民币入账还款，境外消费免收1.5%外币兑换手续费</span></li>
+    <li><span class="ico">🆕</span><span class="lbl">爱购新客礼</span><span class="dtl">新客户任意消费1笔可领拉杆箱或128元立减金等（至2026/12/31）</span></li>
+  </ul>
+  <div class="bank-ft"><span>📱 入口：工银e生活APP + 长隆旅游APP | 年费100元，消费5笔或满5000元免当年</span></div>
+</div>
+
+<!-- 工行通用活动（长隆卡同样参与） -->
+<div class="bank-card shop" style="margin-top:12px">
+  <div class="bank-hd">
+    <div class="bank-name">工行通用每周活动 <span class="badge badge-new">长隆卡可用</span></div>
+  </div>
+  <div class="tags"><span class="tag">加油</span><span class="tag">话费</span><span class="tag">餐饮</span><span class="tag">出行</span><span class="tag">超市</span></div>
+  <ul class="deals">
+    <li><span class="ico">⛽</span><span class="lbl">周四加油满200减20</span><span class="dtl">指定中石油/中石化，需e生活plus小程序提前领券（每周限量）</span></li>
+    <li><span class="ico">📱</span><span class="lbl">周二话费满100减10</span><span class="dtl">话费充值满100元立减10元</span></li>
+    <li><span class="ico">🛒</span><span class="lbl">周五超市满50减10</span><span class="dtl">指定超市消费满50元立减10元</span></li>
+    <li><span class="ico">🍜</span><span class="lbl">周五餐饮满150减20</span><span class="dtl">指定餐厅消费满150元立减20元</span></li>
+    <li><span class="ico">🚕</span><span class="lbl">周一滴滴满10减5</span><span class="dtl">滴滴出行消费满10元立减5元</span></li>
+    <li><span class="ico">🛍️</span><span class="lbl">周三购物满30减6.6</span><span class="dtl">日用消费满30元立减6.6元</span></li>
+    <li><span class="ico">🎁</span><span class="lbl">周周赢好礼（周五~日）</span><span class="dtl">e生活搜"工行消费季"，抽10-20万工银i豆，周限1次</span></li>
+    <li><span class="ico">🍔</span><span class="lbl">美食刮刮乐（至7/31）</span><span class="dtl">每天9:30起，刮5/18/38元美食刷卡金，周到1次，e生活品质外卖可用</span></li>
+  </ul>
+  <div class="bank-ft"><span>📱 入口：工银e生活APP或e生活plus小程序 | 所有满减均需提前领券，领券后7天内有效</span></div>
+
+<!-- ===== 建行 ===== -->
+<div class="bank-card travel" id="ccb">
+  <div class="bank-hd">
+    <div class="bank-name">建设银行 <span class="badge badge-hot">建行生活天天有</span></div>
+  </div>
+  <div class="tags"><span class="tag">3张卡</span><span class="tag">欢享返现</span><span class="tag">建行生活</span><span class="tag">云闪付</span></div>
+  <ul class="deals">
+    <li><span class="ico">🔥</span><span class="lbl">欢享卡·笔笔返现</span><span class="dtl"><strong>境内单笔满10元随机返0.1~99元，月限30次！</strong>（至2026/12/31）。另月消费满2000额外享1次返现6-166元。</span></li>
+    <li><span class="ico">💳</span><span class="lbl">正青春卡·云闪付立减</span><span class="dtl">云闪付单笔满20元随机立减最高20元，每人每日限1次。境外银联消费返1%（日韩澳新2%）。</span></li>
+    <li><span class="ico">🌐</span><span class="lbl">全球支付VISA白金·免转换费</span><span class="dtl">全币种免1.5%货币转换费，境外消费笔笔8%返现（需报名）。境内积分1元=1分，永久有效。</span></li>
+    <li><span class="ico">📅</span><span class="lbl">建行生活每日签到</span><span class="dtl">建行APP-我的-任务中心每天签到集卡牌，开宝箱抽立减金</span></li>
+    <li><span class="ico">🎬</span><span class="lbl">建行生活天天乐</span><span class="dtl">周一咖啡日/周二出行日/周三大片1折/周四萌宠/周五次元/周六美食/周日商超</span></li>
+    <li><span class="ico">💡</span><span class="lbl">缴费抽立减金</span><span class="dtl">建行APP搜"缴费小美好"，缴水电费/话费满30元抽2-5元立减金（月限1次）</span></li>
+    <li><span class="ico">🎰</span><span class="lbl">每日8:00抽立减金</span><span class="dtl">登录建行APP抽1-168元微信立减金（月限1次，至12/31）</span></li>
+  </ul>
+  <div class="bank-ft"><span>⭐ 欢享卡是返现卡（<strong>不计积分</strong>），日常消费用它吃返现最实在。正青春+全球支付卡积龙积分（700分=1元加油）。</span></div>
+</div>
+
+<!-- ===== 光大 ===== -->
+<div class="bank-card" id="ceb">
+  <div class="bank-hd">
+    <div class="bank-name">光大银行 <span class="badge badge-hot">紫麒麟·车主白</span></div>
+  </div>
+  <div class="tags"><span class="tag">4倍积分</span><span class="tag">代驾</span><span class="tag">贵宾厅</span><span class="tag">加油返现</span></div>
+  <ul class="deals">
+    <li><span class="ico">🔥</span><span class="lbl">微信/支付宝4倍积分</span><span class="dtl">线上消费1元=4分，换里程回报率≈1.11%，轻松覆盖0.26%手续费。积分有效期5年。</span></li>
+    <li><span class="ico">⛽</span><span class="lbl">月刷月开心·加油返现</span><span class="dtl">月消费满5000：次月18日9点抢加油满200减50。月消费满10000：加油满200减100。年省1200元。</span></li>
+    <li><span class="ico">🚗</span><span class="lbl">汽车代驾 4次/年</span><span class="dtl">2026年起升级为30公里+30分钟等候（旧规20公里/10分钟），酒后代驾/长途都覆盖</span></li>
+    <li><span class="ico">🛋️</span><span class="lbl">机场/高铁贵宾厅 5点/年</span><span class="dtl">悦途出行，覆盖境内外机场+境内高铁站。每次可携伴3人（扣对应点数），家庭出行神器</span></li>
+    <li><span class="ico">☕</span><span class="lbl">星巴克满40减15</span><span class="dtl">每周五0点起，线下支付宝选光大卡付，满40减15</span></li>
+    <li><span class="ico">🍗</span><span class="lbl">肯德基满30减10</span><span class="dtl">每周五10点起，肯德基线下支付宝选光大卡付，满30减10</span></li>
+  </ul>
+  <div class="bank-ft"><span>📱 入口：阳光惠生活APP | 年费500元/年，消费达标返还(连3月月消费1万等)，次年10万积分抵扣 | 贵宾厅携伴规则业界最友好</span></div>
+</div>
+
+<!-- ===== 广发 ===== -->
+<div class="bank-card" id="cgb">
+  <div class="bank-hd">
+    <div class="bank-name">广发银行 <span class="badge badge-hot">返现不靠积分</span></div>
+  </div>
+  <div class="tags"><span class="tag">返现</span><span class="tag">美团</span><span class="tag">星巴克</span><span class="tag">奈雪</span></div>
+
+  <h4 style="margin:0 0 8px;font-size:13px;color:#6366f1">多利白金卡（主力无脑刷）</h4>
+  <ul class="deals">
+    <li><span class="ico">💎</span><span class="lbl">指定商户10%返现</span><span class="dtl">美团/星巴克/奈雪的茶/滴滴等指定出行平台，消费按10%累计返利金，月上限100返利金</span></li>
+    <li><span class="ico">🔄</span><span class="lbl">微信/支付宝/云闪付1%返现</span><span class="dtl">全场景消费按1%累计返利金，无脑刷直接覆盖0.26%手续费</span></li>
+    <li><span class="ico">💰</span><span class="lbl">返利金兑换签账额</span><span class="dtl">返利金可兑签账额（直接抵扣账单），需自然月消费满10笔且累积满20返利金方可兑换</span></li>
+    <li><span class="ico">🆓</span><span class="lbl">年费免免免</span><span class="dtl">480元/年，首年免，刷12次或绑定微信/支付宝/京东(任一)免次年</span></li>
+  </ul>
+
+  <h4 style="margin:12px 0 8px;font-size:13px;color:#ea580c">天天利白金卡臻享版（8号集中刷）</h4>
+  <ul class="deals">
+    <li><span class="ico">🔥</span><span class="lbl">每月8日8倍积分</span><span class="dtl">每月8号交易享8倍积分，当天集中大额消费是最佳策略</span></li>
+    <li><span class="ico">🎁</span><span class="lbl">批卡立享288元商城券</span><span class="dtl">广发商城兑购指定商品，相当于首年回血</span></li>
+    <li><span class="ico">💳</span><span class="lbl">最低还款/取现返现</span><span class="dtl">批核后6个月内体验最低还款或取现，每次返10元签账额，累计最高5次（共50元）</span></li>
+    <li><span class="ico">⚠️</span><span class="lbl">年费288元 硬性不可免</span><span class="dtl">无减免政策，每年必扣。如果不在8号集中消费，这张卡可能是亏的</span></li>
+  </ul>
+  <div class="bank-ft"><span>📱 入口：发现精彩APP | 多利卡不计传统积分，走返利金体系。天天利臻享版积分走传统体系。</span></div>
+</div>
+
+<!-- ===== 浦发 ===== -->
+<div class="bank-card" id="spdb">
+  <div class="bank-hd">
+    <div class="bank-name">浦发银行</div>
+  </div>
+  <div class="tags"><span class="tag">电商</span><span class="tag">外卖</span></div>
+  <ul class="deals">
+    <li><span class="ico">📦</span><span class="lbl">京东PLUS满减</span><span class="dtl">京东购物使用浦发信用卡支付享满减优惠</span></li>
+    <li><span class="ico">🛵</span><span class="lbl">美团外卖满30减8</span><span class="dtl">浦大喜奔APP电商专区，外卖满减</span></li>
+    <li><span class="ico">🎬</span><span class="lbl">影票/视频会员</span><span class="dtl">积分兑换视频会员、影票折扣</span></li>
+  </ul>
+  <div class="bank-ft"><span>📱 入口：浦大喜奔APP → 电商专区</span></div>
+</div>
+
+<!-- ===== 平安 ===== -->
+<div class="bank-card star" id="pingan">
+  <div class="bank-hd">
+    <div class="bank-name">平安银行 <span style="font-weight:400;color:#64748b;font-size:13px">悦享白金卡</span> <span class="badge badge-hot">生活神卡</span></div>
+  </div>
+  <div class="tags"><span class="tag">百变好礼月月享</span><span class="tag">视频会员</span><span class="tag">咖啡饮品</span><span class="tag">积分当钱花</span></div>
+  <ul class="deals">
+    <li><span class="ico">🎁</span><span class="lbl">百变好礼月月享（核心权益）</span><span class="dtl">每月消费5笔18元→获2张兑换券；累计消费3888元→再获1张。全年最多52张！可兑：<strong>腾讯视频/爱奇艺/优酷/芒果TV/B站大会员、QQ音乐/网易云音乐会员、喜茶/奈雪/瑞幸饮品券、美团/京东/盒马立减券、饿了么红包、洗车券</strong>。新户核卡12个月内有效。</span></li>
+    <li><span class="ico">🧧</span><span class="lbl">新户168元礼包</span><span class="dtl">核卡次月底前任意消费1笔→150元微信立减金+18元超级还款金，合计168元</span></li>
+    <li><span class="ico">💳</span><span class="lbl">积分当钱花</span><span class="dtl">开通后在支付宝/京东/抖音/携程等平台直接用万里通积分抵现，消费时自动抵扣</span></li>
+    <li><span class="ico">🛒</span><span class="lbl">淘宝天猫分期立减</span><span class="dtl">分期满500减25 / 满1500减75；七大平台支持补贴+分期优惠+消费红包叠加</span></li>
+    <li><span class="ico">🛡️</span><span class="lbl">白金保障</span><span class="dtl">72小时盗刷免赔、至高100万交通意外险、银联白金机场/高铁贵宾厅权益</span></li>
+  </ul>
+  <div class="bank-ft"><span>📱 入口：平安口袋银行APP → 我的 → 我的权益 | 年费480元，首年免，绑微信/支付宝或刷6次免次年 | ⭐ 新户建议核卡后12个月内每月达标5笔拿满兑换券</span></div>
+</div>
+
+<!-- ===== 积分活动 ===== -->
+<h2 class="section-title" id="points" style="margin-top: 48px;"><span class="icon">⭐</span> 三、积分活动全攻略</h2>
+
+<div class="summary" id="points-matrix">
+  <h3>积分价值速查 · 10万积分能换什么</h3>
+  <table>
+    <tr><th>银行</th><th>最佳兑换</th><th style="text-align:right">10万分≈价值</th><th>多倍积分</th><th>有效期</th></tr>
+    <tr><td>农行</td><td class="hl">航空里程(南航/海航/厦航等)</td><td style="text-align:right;font-weight:600">尊然白≈200元(25:1)<br>其他卡≈125元(40:1)</td><td>5倍包(¥46.6/月) / 可同时买多个叠加 / 仅尊然白值得买</td><td>长期有效</td></tr>
+    <tr><td>建行</td><td class="hl">加油卡(汽车卡)</td><td style="text-align:right;font-weight:600">≈400元</td><td>各类多倍活动</td><td>长期有效</td></tr>
+    <tr><td>中行</td><td class="hl">南航里程 / 京东钢镚</td><td style="text-align:right;font-weight:600">≈270元</td><td>多倍积分活动丰富</td><td>2年</td></tr>
+    <tr><td>广发</td><td class="hl">多利10%返现 / 天天利8倍积分</td><td style="text-align:right;font-weight:600">多利1%返现 / 天天利2.16%(8号)</td><td>天天利:每月8日8倍</td><td>2年</td></tr>
+    <tr><td>工行</td><td>话费 / 加油卡</td><td style="text-align:right">≈200元</td><td>较少（无常态化多倍）</td><td>长期有效</td></tr>
+    <tr><td>平安</td><td>百变好礼兑换券 / 话费(500分=1元)</td><td style="text-align:right;font-weight:600">≈320元(券价值)</td><td>月消费5笔18元 / 生日月5倍积分</td><td>2-5年</td></tr>
+    <tr><td>光大</td><td class="hl">航空里程 18:1</td><td style="text-align:right;font-weight:600">≈111-556元</td><td>微信/支付宝4倍积分(常态化)</td><td>5年</td></tr>
+    <tr><td>浦发</td><td class="hl">南航里程(联名卡自动转)</td><td style="text-align:right;font-weight:600">≈330元(10万分)</td><td>联名卡自动转换 / 无额外成本</td><td>8年</td></tr>
+    <tr><td>邮储</td><td>鼎致白：抵年费最优<br>青春卡：兑换点返现</td><td style="text-align:right;font-weight:600">鼎致≈2600元(抵年费)<br>青春1%返现</td><td>鼎致/小绿卡：周六2倍(5万上限)<br>青春卡：消费返1%兑换点</td><td>鼎致：永久<br>青春兑换点：365天</td></tr>
+  </table>
+</div>
+
+<!-- 农行积分 -->
+<div class="bank-card star" id="abc-points">
+  <div class="bank-hd">
+    <div class="bank-name">农业银行 · 积分 <span class="badge badge-hot">尊然白是攒分发动机</span><span class="badge" style="background:#ea580c">2026.3更新</span></div>
+  </div>
+  <div class="tags"><span class="tag">5倍积分</span><span class="tag">航空里程</span><span class="tag">多包叠加</span><span class="tag">尊然白25:1</span><span class="tag">其余40:1</span></div>
+  <ul class="deals">
+    <li><span class="ico">🔥</span><span class="lbl">多渠道5倍积分月包</span><span class="dtl">46.6元/月购买，次月生效。微信/支付宝/京东/美团/抖音/拼多多/携程7大渠道消费享5倍积分，月上限10万分。叠加基础1倍共得6倍！</span></li>
+    <li><span class="ico">📦</span><span class="lbl">可同时买多个5倍包</span><span class="dtl">微信5倍月包(19.9元) + 微信5倍年包 + 多渠道5倍月包(46.6元)，可叠加购买，攒分效率翻倍</span></li>
+    <li><span class="ico">🎯</span><span class="lbl">邀约2倍积分</span><span class="dtl">收到邀约短信完成指定任务后，7大渠道消费享2倍积分，上限5万分</span></li>
+    <li><span class="ico">📅</span><span class="lbl">双11/双12多倍</span><span class="dtl">双十一11倍、双十二12倍积分活动（年度最大攒分窗口）</span></li>
+    <li><span class="ico">✈️</span><span class="lbl">兑换航空里程（2026.3调整后）</span><span class="dtl"><strong style="color:#059669">尊然白金卡（万事达）：25:1</strong>，叠加6倍≈4.17:1；<strong style="color:#ea580c">其余4张卡（超然商务/车主双卡/悦卡）：40:1</strong>，叠加6倍≈6.67:1。可换南航/海航/厦航/国航/吉祥。<span style="color:#ea580c">东航暂停中。</span></span></li>
+    <li><span class="ico">👑</span><span class="lbl">你的尊然白积分怎么用</span><span class="dtl"><strong>优先10万积分抵880元年费</strong>（相当于积分价值0.88%），其次攒分换接送机（10万分/次），多余的再换里程。尊然白买5倍包→月消费1万净回报<span style="color:#059669;font-weight:700">≈0.49%</span>。</span></li>
+    <li><span class="ico">⚠️</span><span class="lbl">其他4张卡积分策略</span><span class="dtl">40:1兑换比例下，买5倍包后净回报仅0.13%，不划算。这4张卡<strong>不建议买5倍包攒分</strong>，靠活动立减和各自专属权益即可。</span></li>
+    <li><span class="ico">⏱️</span><span class="lbl">积分长期有效</span><span class="dtl">不用担心过期，尊然白攒的积分可以慢慢等好活动</span></li>
+  </ul>
+  <div class="bank-ft"><span>⭐ 关键结论：你有尊然白，可以买5倍积分包用尊然白消费攒分，换里程净回报0.49%稳超0.26%手续费。另外4张农行卡不靠积分吃饭，各自有专属权益玩法。</span></div>
+</div>
+
+<!-- 建行积分 -->
+<div class="bank-card star" id="ccb-points">
+  <div class="bank-hd">
+    <div class="bank-name">建设银行 · 积分 <span class="badge badge-fuel">注意卡种!</span></div>
+  </div>
+  <div class="tags"><span class="tag">欢享卡不计分</span><span class="tag">龙积分700:1</span><span class="tag">永久有效</span></div>
+  <ul class="deals">
+    <li><span class="ico">⚠️</span><span class="lbl">欢享卡不计积分!</span><span class="dtl">龙卡欢享信用卡银联版是纯返现卡，消费<strong>不累计积分</strong>，价值全部在笔笔返现（月30次随机返）。</span></li>
+    <li><span class="ico">🐱</span><span class="lbl">正青春卡·普通龙积分</span><span class="dtl">1元=1分，建行生活700分=1元加油/话费，10万分≈143元（回报仅0.14%）。</span></li>
+    <li><span class="ico">🌐</span><span class="lbl">全球支付卡·永久有效</span><span class="dtl">1元=1分/1美元=7分，积分永久有效。境外消费自动免货币转换费，适合出境用。</span></li>
+    <li><span class="ico">🔄</span><span class="lbl">龙积分700:1抵现</span><span class="dtl">建行生活APP→龙积分商城，加油/话费/外卖/打车均可700分抵1元，至高抵90%。</span></li>
+    <li><span class="ico">⏱️</span><span class="lbl">积分有效期</span><span class="dtl">普通积分5年有效（全球支付卡永久），注意到期时间。</span></li>
+  </ul>
+  <div class="bank-ft"><span>⭐ 你没有汽车卡，龙积分700分=1元回报仅0.14%，低于0.26%手续费。<strong>建行推荐策略：欢享卡吃返现（不计积分），正青春/全球支付积分随缘。</strong></span></div>
+</div>
+
+<!-- 中行积分 -->
+<div class="bank-card" id="boc-points">
+  <div class="bank-hd">
+    <div class="bank-name">中国银行 · 积分</div>
+  </div>
+  <div class="tags"><span class="tag">里程</span><span class="tag">京东钢镚</span><span class="tag">多倍多</span></div>
+  <ul class="deals">
+    <li><span class="ico">✈️</span><span class="lbl">南航里程</span><span class="dtl">10万积分≈270元，年上限30万里程</span></li>
+    <li><span class="ico">🛒</span><span class="lbl">京东钢镚</span><span class="dtl">10万积分≈220元，月上限500钢镚</span></li>
+    <li><span class="ico">🔄</span><span class="lbl">多倍积分活动丰富</span><span class="dtl">中行经常推出各类多倍积分计划，关注"中国银行信用卡"公众号</span></li>
+    <li><span class="ico">⏱️</span><span class="lbl">有效期2年</span><span class="dtl">注意按时兑换，避免过期</span></li>
+  </ul>
+  <div class="bank-ft"><span>⭐ 结合7月消费达标抽立减金活动，大额消费集中刷中行一举两得。</span></div>
+</div>
+
+<!-- 工行积分 -->
+<div class="bank-card" id="icbc-points">
+  <div class="bank-hd">
+    <div class="bank-name">工商银行 · 工银i豆</div>
+  </div>
+  <div class="tags"><span class="tag">工银i豆</span><span class="tag">话费</span><span class="tag">难攒</span><span class="tag">长隆双积分</span></div>
+  <ul class="deals">
+    <li><span class="ico">💎</span><span class="lbl">工银i豆而非传统积分</span><span class="dtl">工行使用工银i豆体系，消费1元=1i豆，可在e生活兑换话费/加油卡等。10万i豆≈200元。</span></li>
+    <li><span class="ico">🎢</span><span class="lbl">长隆消费双重累计</span><span class="dtl">长隆园区内消费同时累积工银i豆 + 长隆欢享家会员积分，双向回馈</span></li>
+    <li><span class="ico">⚠️</span><span class="lbl">攒分困难</span><span class="dtl">工行几乎没有常态化多倍积分活动，i豆主要靠日常消费和周周赢好礼活动抽取</span></li>
+    <li><span class="ico">⏱️</span><span class="lbl">i豆长期有效</span><span class="dtl">虽然攒得慢但不会过期</span></li>
+  </ul>
+  <div class="bank-ft"><span>⭐ 工行i豆难攒但长期有效。核心价值不在i豆而在长隆门票5折和每周满减活动。去一次长隆省的门票钱远超一年i豆价值。</span></div>
+</div>
+
+<!-- 邮储积分 -->
+<div class="bank-card" id="psbc-points">
+  <div class="bank-hd">
+    <div class="bank-name">邮储银行 · 积分解构（3种不同体系）</div>
+  </div>
+  <div class="tags"><span class="tag">鼎致积分</span><span class="tag">小绿卡积分</span><span class="tag">青春兑换点</span></div>
+  <ul class="deals">
+    <li><span class="ico">👑</span><span class="lbl">鼎致白：积分永久有效</span><span class="dtl">周六2倍积分（月上限5万）。积分换年费：20万分抵2600元年费，价值最高。剩余可兑咖啡券/视频会员等，10万分≈100元。20万积分减年费场景下≈1.3%回报。</span></li>
+    <li><span class="ico">🌍</span><span class="lbl">小绿卡：生日月/分期2倍</span><span class="dtl">常规积分价值同上（10万分≈100元，回报0.10%）。生日月2倍=0.20%，仍不覆盖手续费。核心价值在活动立减，不在积分。</span></li>
+    <li><span class="ico">🎓</span><span class="lbl">青春卡：1%兑换点（非积分！）</span><span class="dtl">完全不计积分。消费1000元=10兑换点=5元券（回报0.50%），消费1500元=15兑换点=30元视频月卡（回报2.00%），均远超0.26%手续费。年费99%免，普卡终身免年费。</span></li>
+    <li><span class="ico">🎂</span><span class="lbl">生日月共享</span><span class="dtl">鼎致白+小绿卡：白金生日月2倍积分。青春卡不参与积分体系。</span></li>
+  </ul>
+  <div class="bank-ft"><span>⭐ 鼎致白积分优先抵年费（20万分=2600元）；小绿卡积分随缘；青春卡消费返现1%才是邮储隐藏王牌，日常刷它稳超0.26%手续费。</span></div>
+</div>
+
+<!-- 光大积分 -->
+<div class="bank-card" id="ceb-points">
+  <div class="bank-hd">
+    <div class="bank-name">光大银行 · 积分 <span class="badge badge-hot">4倍无脑刷</span></div>
+  </div>
+  <div class="tags"><span class="tag">4倍积分</span><span class="tag">里程18:1</span><span class="tag">5年有效</span></div>
+  <ul class="deals">
+    <li><span class="ico">🔥</span><span class="lbl">微信/支付宝4倍积分</span><span class="dtl">紫麒麟车主白金卡专属，日常消费1元=4分。按18:1换里程算，回报率≈1.11%，远超0.26%手续费。</span></li>
+    <li><span class="ico">✈️</span><span class="lbl">最佳兑换：航空里程 18:1</span><span class="dtl">18积分换1里程，年上限5万里程。配合4倍积分，月消费1万可得4万分≈2222里程≈111元。</span></li>
+    <li><span class="ico">🎂</span><span class="lbl">生日月额外多倍</span><span class="dtl">白金卡生日月额外3倍（与4倍可叠加？需实测确认），上限额度4倍</span></li>
+    <li><span class="ico">⏱️</span><span class="lbl">积分有效期5年</span><span class="dtl">比之前的2年翻了一倍多，攒分不用太焦虑</span></li>
+  </ul>
+  <div class="bank-ft"><span>⭐ 紫麒麟卡实现了"积分回报+权益"双赢：4倍积分日常无脑刷，月刷月开心加油返现是纯增量。</span></div>
+</div>
+
+<!-- 广发积分 -->
+<div class="bank-card" id="cgb-points">
+  <div class="bank-hd">
+    <div class="bank-name">广发银行 · 积分/返现 <span class="badge badge-hot">双卡双体系</span></div>
+  </div>
+  <div class="tags"><span class="tag">多利返利金</span><span class="tag">天天利8倍</span><span class="tag">2年有效</span></div>
+  <h4 style="margin:0 0 6px;font-size:13px;color:#6366f1">多利白金卡 → 返利金体系（非积分）</h4>
+  <ul class="deals">
+    <li><span class="ico">💎</span><span class="lbl">10%返现商户</span><span class="dtl">美团/星巴克/奈雪/滴滴出行等，月上限100返利金</span></li>
+    <li><span class="ico">🔄</span><span class="lbl">1%全场景返现</span><span class="dtl">微信/支付宝/云闪付，月累计满20返利金+消费满10笔即可兑换签账额</span></li>
+    <li><span class="ico">⚠️</span><span class="lbl">不计传统积分</span><span class="dtl">多利卡不累计广发银行传统积分，完全走返利金通道，积分相关活动均不参与</span></li>
+  </ul>
+  <h4 style="margin:10px 0 6px;font-size:13px;color:#ea580c">天天利白金卡臻享版 → 传统积分</h4>
+  <ul class="deals">
+    <li><span class="ico">🔥</span><span class="lbl">每月8日8倍积分</span><span class="dtl">1元=8分，当天集中消费。换南航里程约10万分≈270元，回报率2.16%</span></li>
+    <li><span class="ico">🧮</span><span class="lbl">年费回本计算</span><span class="dtl">288元年费需8号消费约13,333元方可回本（2.16%×13333≈288元）</span></li>
+    <li><span class="ico">⏱️</span><span class="lbl">有效期2年</span><span class="dtl">积分与卡片有效期一致，注意及时兑换</span></li>
+  </ul>
+  <div class="bank-ft"><span>⭐ 多利卡1%返现简单直接，是广发日常无脑刷首选。天天利臻享版仅适合每月8号有大额消费的场景，需算清楚288元年费是否值。</span></div>
+</div>
+
+<!-- 浦发积分 -->
+<div class="bank-card star" id="spdb-points">
+  <div class="bank-hd">
+    <div class="bank-name">浦发银行 · 积分 <span class="badge badge-hot">南航联名 无脑攒里程</span></div>
+  </div>
+  <div class="tags"><span class="tag">南航联名白金卡</span><span class="tag">15:1自动转</span><span class="tag">8年有效</span></div>
+  <ul class="deals">
+    <li><span class="ico">✈️</span><span class="lbl">15:1自动转南航里程</span><span class="dtl">消费1元=1联名卡积分，每15积分自动转换为1南航里程，无需手动操作。于下一个账单日后20个工作日内自动到账南航会员账户。</span></li>
+    <li><span class="ico">📱</span><span class="lbl">主流网付全部计积分</span><span class="dtl">微信/支付宝/京东/美团/抖音/拼多多等主流网付渠道消费均可累积联名卡积分，日常消费无死角。</span></li>
+    <li><span class="ico">💰</span><span class="lbl">积分价值稳定</span><span class="dtl">10万消费≈6667南航里程≈333元价值。无额外成本（不需买积分包），纯自动转换。</span></li>
+    <li><span class="ico">📊</span><span class="lbl">年上限6万里程</span><span class="dtl">每年最多自动转换6万南航里程（对应消费90万元），日常使用完全够。</span></li>
+    <li><span class="ico">🎫</span><span class="lbl">年费轻松免</span><span class="dtl">年费360元/年，首年免年费，次年刷满6次即免，几乎零持有成本。</span></li>
+    <li><span class="ico">⏱️</span><span class="lbl">积分有效期8年</span><span class="dtl">比其他行的2年有效期宽松很多</span></li>
+  </ul>
+  <div class="bank-ft"><span>⭐ 南航联名卡的积分和普通浦发卡是两个体系。联名卡积分自动转里程，不需买5倍包、不需手动兑换。日常无脑刷，稳超0.26%手续费。</span></div>
+</div>
+
+<!-- 平安积分 -->
+<div class="bank-card star" id="pingan-points">
+  <div class="bank-hd">
+    <div class="bank-name">平安银行 · 悦享白金卡积分 &amp; 百变好礼</div>
+  </div>
+  <div class="tags"><span class="tag">百变好礼</span><span class="tag">生日5倍</span><span class="tag">积分当钱花</span></div>
+  <ul class="deals">
+    <li><span class="ico">🎁</span><span class="lbl">百变好礼才是核心回报</span><span class="dtl"><strong>平安悦享白不靠积分，靠兑换券。</strong>月消费5笔18元=2张券，按视频月卡~25元/张计，年24张≈600元；月消费3888额外+1张，年12张≈300元。新户全年合计≈900元，远超积分回报。老户也能持续拿24张/年≈600元。</span></li>
+    <li><span class="ico">💡</span><span class="lbl">兑换券价值估算</span><span class="dtl">视频月卡（腾讯/爱奇艺/B站等）≈25元、咖啡券（星巴克/瑞幸/喜茶/奈雪）≈15-30元、外卖券（美团/饿了么）≈10-15元、洗车券≈20元。每张券平均价值约15-25元。</span></li>
+    <li><span class="ico">📱</span><span class="lbl">话费兑换</span><span class="dtl">万里通积分500分=1元话费，10万分≈200元，兑换比例直接。积分当钱花功能可在支付宝/京东/抖音/携程直接抵现。</span></li>
+    <li><span class="ico">🎂</span><span class="lbl">生日月5倍积分</span><span class="dtl">悦享白金卡（标准白金级别）主卡生日月，计积分消费享5倍(1倍+4倍奖励)，上限为固定额度4倍。生日当月把大额消费分配给这张卡冲刺一波。</span></li>
+    <li><span class="ico">🔄</span><span class="lbl">万里通积分生态</span><span class="dtl">可转国航/东航里程、兑换京东钢镚、购物卡。积分有效期2-5年，注意及时兑换。</span></li>
+    <li><span class="ico">⚠️</span><span class="lbl">积分获取门槛高</span><span class="dtl">平安积分与资产挂钩：资产&lt;1000元时每30元=12分（回报仅0.08%），资产≥1000元时每30元=30分（回报0.20%）。<strong>日常别靠积分，靠百变好礼。</strong></span></li>
+  </ul>
+  <div class="bank-ft"><span>⭐ 核心策略：每月5笔18元达标拿券 → 兑视频会员/咖啡券自用或变现。生日月集中大额消费冲5倍积分。无需关注日常积分回报，百变好礼已足够覆盖卡片价值。</span></div>
+</div>
+
+<!-- 积分策略 -->
+<div class="tips">
+  <h3>积分策略建议</h3>
+  <ul>
+    <li><strong>攒分首选</strong> → <span style="color:#059669">农行尊然白金卡</span>：你有高端卡！买5倍积分包(¥46.6/月)，7大渠道消费全走尊然白。积分优先抵年费（10万分=880元，回报0.88%）→ 次优兑接送机（10万分/次）→ 剩余换里程（25:1，回报0.49%）。<strong>你另外4张农行卡千万别买积分包，40:1不划算。</strong></li>
+    <li><strong>生日月爆发</strong>：光大(3倍，白金)、平安悦享白(5倍，标准白金)、邮储(2倍，白金)，生日当月把大额消费分配给这些卡。广发多利卡不计积分，天天利臻享版以8号8倍为主，生日月非核心策略。</li>
+    <li><strong>兑换优先级</strong>：航空里程（南航正常/东航暂停）> 加油卡 > 话费 > 京东E卡 > 视频会员 > 星巴克/肯德基 > 积分商城实物（最不推荐）。</li>
+    <li><strong>注意事项</strong>：中行/广发天天利积分2年有效，到期前3个月规划兑换；工行积分难攒但长期有效，随缘用；农行/建行/邮储积分长期有效或永久，可以慢慢攒等好活动。广发多利卡走返利金体系，不涉及积分有效期。</li>
+  </ul>
+</div>
+
+<!-- ===== 每日活动周历 ===== -->
+<h2 class="section-title" id="daily" style="margin-top: 48px;"><span class="icon">📅</span> 四、每日活动周历</h2>
+
+<div class="summary">
+  <h3>每周优惠日历 · 一张表看每天刷哪张</h3>
+  <table>
+    <tr><th style="width:10%">星期</th><th style="width:18%">主题</th><th>活动内容</th><th style="width:12%">用卡</th></tr>
+    <tr>
+      <td><strong>周一</strong></td>
+      <td>咖啡日</td>
+      <td>浦发大牌茶咖半价（喜茶/奈雪/霸王茶姬等7个品牌）<br>建行生活周一咖啡日：1分钱抽最高20元咖啡立减金<br>京东PLUS联名卡满99减10（浦发）</td>
+      <td>浦发<br>建行</td>
+    </tr>
+    <tr>
+      <td><strong>周二</strong></td>
+      <td>出行日 + 积分日</td>
+      <td>农行抖音消费专享双倍积分<br>建行生活周二出行日：地铁公交/加油/飞机优惠券<br>平安好车主加油券100-50/50-25（须周五抢，周二用）</td>
+      <td>农行<br>建行</td>
+    </tr>
+    <tr>
+      <td><strong>周三</strong></td>
+      <td>沉浸日</td>
+      <td>浦发茶咖半价（每天都有）<br>建行生活周三沉浸日：热门大片1折起<br>平安支付会员每周三领好礼（微信立减金/橙长值）</td>
+      <td>浦发<br>建行<br>平安</td>
+    </tr>
+    <tr>
+      <td><strong>周四</strong></td>
+      <td>萌宠 + 出行</td>
+      <td>浦发茶咖半价<br>建行生活周四萌宠日：宠物商户满50减20<br>工行指定加油站满200减20（需提前小程序领券）</td>
+      <td>浦发<br>建行<br>工行</td>
+    </tr>
+    <tr>
+      <td><strong>周五</strong></td>
+      <td>超级活动日</td>
+      <td>光大：星巴克满40-15、肯德基满30-10（支付宝）<br>广发：超级广发日5折饭票（麦当劳/肯德基等）<br>建行生活：龙积分充B站大会员高抵扣<br>农行：支付宝-碰一下满50减5<br>工行：周周赢好礼（周五~周日）抽10-20万i豆<br>邮储：支付宝天天减（满10-1，月6次）</td>
+      <td>光大<br>广发<br>建行</td>
+    </tr>
+    <tr>
+      <td><strong>周六</strong></td>
+      <td>抢购日</td>
+      <td>浦发茶咖1元购（10点起：瑞幸/蜜雪/喜茶/霸王/奈雪等）<br>建行生活周六美食日：1分钱抽最高30元餐饮立减金<br>邮储商超5折（最高减50）、观影5折<br>广发5折饭票</td>
+      <td>浦发<br>邮储<br>建行</td>
+    </tr>
+    <tr>
+      <td><strong>周日</strong></td>
+      <td>商超日</td>
+      <td>浦发茶咖半价<br>建行生活周日商超日：1元购+龙积分超值换购<br>邮储支付宝永辉/大润发满50减5</td>
+      <td>浦发<br>建行<br>邮储</td>
+    </tr>
+  </table>
+</div>
+
+<!-- 各银行每日活动明细 -->
+<h3 style="margin-top: 32px; margin-bottom: 12px; color: #1e293b;">各银行每日活动明细</h3>
+
+<div class="bank-card" id="daily-psbc">
+  <div class="bank-hd"><span class="bank-name">邮储银行</span><span class="bank-tag hot">3卡分工</span></div>
+  <ul>
+    <li><span class="ico">🎓</span><span class="lbl">青春卡1%返兑换点</span><span class="dtl">微信/支付宝/线下计积分商户消费自动累1%兑换点，兑饿了么券/滴滴券/视频会员，普卡免年费（至2026/12/31）</span></li>
+    <li><span class="ico">👑</span><span class="lbl">鼎致白周六2倍积分</span><span class="dtl">每周末消费2倍积分（月上限5万分），目标攒20万抵2600元年费</span></li>
+    <li><span class="ico">📅</span><span class="lbl">周周享·消费6天礼</span><span class="dtl">当月消费满6天（日≥9.9元），领6元支付宝代金券（满36用），月至多2次（至7/31）</span></li>
+    <li><span class="ico">💳</span><span class="lbl">支付宝天天减</span><span class="dtl">永辉/大润发满50减5；小额满10减1（月6次）、满50减5（月1次）</span></li>
+    <li><span class="ico">⛽</span><span class="lbl">中石化随机减</span><span class="dtl">每月1次，随机减3-66元（至2027/3/31）</span></li>
+    <li><span class="ico">🎬</span><span class="lbl">周六5折狂欢</span><span class="dtl">上月消费满6000元，次月周六领25元券（满50用）。观影5折（需满1000元）</span></li>
+    <li><span class="ico">🛒</span><span class="lbl">周六商超5折</span><span class="dtl">最高减50元</span></li>
+  </ul>
+</div>
+
+<div class="bank-card" id="daily-boc">
+  <div class="bank-hd"><span class="bank-name">中国银行</span><span class="bank-tag hot">支付宝必参加</span></div>
+  <ul>
+    <li><span class="ico">📅</span><span class="lbl">支付宝天天减</span><span class="dtl">报名后连续7天，单笔满20元随机减0.3-6.18元（每日限1次）</span></li>
+    <li><span class="ico">⛽</span><span class="lbl">每日加油9.2折</span><span class="dtl">中石化加油用支付宝绑中行卡，单笔最高减24元（月限1次，部分地区）</span></li>
+    <li><span class="ico">⭐</span><span class="lbl">支付宝宝藏特权</span><span class="dtl">报名后支付宝消费每月攒福气值（积分），最高3万点/月</span></li>
+    <li><span class="ico">🎁</span><span class="lbl">7月消费达标抽奖</span><span class="dtl">当月消费满5万元，次月抽最高999元立减金</span></li>
+    <li><span class="ico">🚗</span><span class="lbl">汽车卡每月3笔199</span><span class="dtl">达标可兑30元洗车券/京东E卡等（7-8月活动）</span></li>
+  </ul>
+</div>
+
+<div class="bank-card" id="daily-abc">
+  <div class="bank-hd"><span class="bank-name">农业银行</span><span class="bank-tag hot">5卡分工明确</span></div>
+  <ul>
+    <li><span class="ico">👑</span><span class="lbl">尊然白·全渠道攒分</span><span class="dtl">日常微信/支付宝/京东/美团/抖音/拼多多/携程消费全走尊然白，买5倍包后实效6倍积分。积分优先抵年费→兑接送机→换里程。</span></li>
+    <li><span class="ico">👑</span><span class="lbl">尊然白·贵宾厅</span><span class="dtl">出发前去机场贵宾厅，激活首刷2日后可用，全年6次。积分还可再兑3次（6万分/次）。</span></li>
+    <li><span class="ico">👑</span><span class="lbl">尊然白·接送机</span><span class="dtl">10万积分兑换1次境内接送机，全年可享12次。数量有限先到先得。</span></li>
+    <li><span class="ico">👑</span><span class="lbl">尊然白·预约挂号</span><span class="dtl">全年3次三甲医院专家预约挂号+全程陪诊（可给家人用）</span></li>
+    <li><span class="ico">💼</span><span class="lbl">超然商务卡·境外返现</span><span class="dtl">境外线下消费笔笔返3%（需报名），精选商户10%。免货币转换费。</span></li>
+    <li><span class="ico">⛽</span><span class="lbl">车主畅享版·加油/充电</span><span class="dtl">月消费满888→次月8号起领加油券(200-20)或充电券(30-20)。满3888再领1张。中石油/中石化/云闪付。</span></li>
+    <li><span class="ico">🧽</span><span class="lbl">车主卡·1元洗车</span><span class="dtl">尊享版+畅享版均可享，每月1次，优惠至高40元（名额有限）</span></li>
+    <li><span class="ico">🍺</span><span class="lbl">车主卡·1元代驾</span><span class="dtl">尊享版+畅享版每季度1次，优惠至高80元</span></li>
+    <li><span class="ico">☕</span><span class="lbl">悦卡·茶咖1分购</span><span class="dtl">每月1分钱领奈雪/喜茶/瑞幸券（至6/30，存量客户是否可续待确认）</span></li>
+    <li><span class="ico">🎯</span><span class="lbl">悦卡·月月兑（7-8月）</span><span class="dtl">消费满888/1888/8888元，次月3日起兑视频会员/骑行卡/外卖券/咖啡券等</span></li>
+    <li><span class="ico">📅</span><span class="lbl">通用·每日签到</span><span class="dtl">掌银APP-信用卡-旅游节打卡，每月签到3次+消费达标领5元刷卡金</span></li>
+    <li><span class="ico">📱</span><span class="lbl">通用·抖音满200随机减</span><span class="dtl">抖音支付满200随机减至高28元（周二双倍积分时段可叠加尊然白）</span></li>
+    <li><span class="ico">🚕</span><span class="lbl">通用·网约车7折</span><span class="dtl">T3/高德/滴滴/曹操用农行卡7折，单次最高减10元</span></li>
+    <li><span class="ico">☕</span><span class="lbl">通用·奶茶咖啡返现</span><span class="dtl">微信支付奶茶/咖啡满10元随机返现，单笔最高返10元（月6次）</span></li>
+  </ul>
+</div>
+
+<div class="bank-card" id="daily-icbc">
+  <div class="bank-hd"><span class="bank-name">工商银行（长隆运通金卡通用）</span><span class="bank-tag">周五~周日集中刷</span></div>
+  <ul>
+    <li><span class="ico">📅</span><span class="lbl">每日签到</span><span class="dtl">工银e生活APP签到，攒工银i豆</span></li>
+    <li><span class="ico">🎁</span><span class="lbl">周周赢好礼（周五~周日）</span><span class="dtl">e生活搜"工行消费季"，抽10-20万工银i豆，周限1次</span></li>
+    <li><span class="ico">🍔</span><span class="lbl">美食刮刮乐（至7/31每天9:30）</span><span class="dtl">刮5/18/38元美食刷卡金，周限1次</span></li>
+    <li><span class="ico">⛽</span><span class="lbl">周四加油满200减20</span><span class="dtl">指定中石油/中石化，需e生活plus小程序提前领券</span></li>
+    <li><span class="ico">☕</span><span class="lbl">周一滴滴满10减5</span><span class="dtl">滴滴出行消费满10元立减5元</span></li>
+    <li><span class="ico">📱</span><span class="lbl">周二话费满100减10</span><span class="dtl">话费充值满100元立减10元</span></li>
+    <li><span class="ico">🛒</span><span class="lbl">周三购物满30减6.6</span><span class="dtl">日用购物满30元立减6.6元</span></li>
+    <li><span class="ico">🍜</span><span class="lbl">周五指定餐饮满150减20</span><span class="dtl">指定餐厅消费满150元立减20元</span></li>
+    <li><span class="ico">🛒</span><span class="lbl">周五指定超市满50减10</span><span class="dtl">指定超市消费满50元立减10元</span></li>
+    <li><span class="ico">🎢</span><span class="lbl">长隆门票5折（随时）</span><span class="dtl">长隆旅游APP→会员→领5折券，每人每园1次</span></li>
+  </ul>
+</div>
+
+<div class="bank-card" id="daily-ccb">
+  <div class="bank-hd"><span class="bank-name">建设银行</span><span class="bank-tag hot">建行生活天天有</span></div>
+  <ul>
+    <li><span class="ico">📅</span><span class="lbl">每日签到开宝箱</span><span class="dtl">建行APP-我的-任务中心，每天签到集卡牌，开宝箱抽立减金</span></li>
+    <li><span class="ico">🎰</span><span class="lbl">每日8:00抽立减金</span><span class="dtl">登录建行APP抽1-168元微信立减金（月限1次）</span></li>
+    <li><span class="ico">💳</span><span class="lbl">每日0:00云闪付笔笔减</span><span class="dtl">云闪付搜"建行手机银行云网支付笔笔减"，移动/联通/国网充值</span></li>
+    <li><span class="ico">☕</span><span class="lbl">周一咖啡日</span><span class="dtl">建行生活：1分钱抽最高20元咖啡立减金</span></li>
+    <li><span class="ico">🚇</span><span class="lbl">周二出行日</span><span class="dtl">建行生活：地铁公交/加油/飞机票优惠券</span></li>
+    <li><span class="ico">🎬</span><span class="lbl">周三沉浸日</span><span class="dtl">建行生活：热门大片1折起</span></li>
+    <li><span class="ico">🐱</span><span class="lbl">周四萌宠日</span><span class="dtl">建行生活：宠物商户满50减20</span></li>
+    <li><span class="ico">🎮</span><span class="lbl">周五次元日</span><span class="dtl">建行生活：龙积分充值B站大会员，最高抵90%</span></li>
+    <li><span class="ico">🍜</span><span class="lbl">周六美食日</span><span class="dtl">建行生活：1分钱抽最高30元餐饮立减金</span></li>
+    <li><span class="ico">🛒</span><span class="lbl">周日商超日</span><span class="dtl">建行生活：1元购+龙积分好物超值购</span></li>
+  </ul>
+</div>
+
+<div class="bank-card" id="daily-ceb">
+  <div class="bank-hd"><span class="bank-name">光大银行·紫麒麟</span><span class="bank-tag hot">4倍+加油返现</span></div>
+  <ul>
+    <li><span class="ico">📅</span><span class="lbl">每日签到</span><span class="dtl">阳光惠生活APP签到攒积分、领抽奖机会</span></li>
+    <li><span class="ico">🔥</span><span class="lbl">微信/支付宝 4倍积分</span><span class="dtl">线上消费1元=4分，日常无脑首选。换里程回报率1.11%碾压手续费</span></li>
+    <li><span class="ico">⛽</span><span class="lbl">月刷月开心·加油返现</span><span class="dtl">月消费5千→次月18日9点抢加油200-50；月消费1万→加油200-100</span></li>
+    <li><span class="ico">☕</span><span class="lbl">周五·星巴克满40减15</span><span class="dtl">支付宝绑光大卡消费，满40减15（月限1次）</span></li>
+    <li><span class="ico">🍗</span><span class="lbl">周五·肯德基满30减10</span><span class="dtl">支付宝绑光大卡，满30减10（月限1次）</span></li>
+    <li><span class="ico">🛒</span><span class="lbl">周五·淘宝满200减10 / 京东满200减10 / 美团随机减</span><span class="dtl">各月限1次，周五顺手用</span></li>
+    <li><span class="ico">🍽️</span><span class="lbl">周五11:00·5折本地美食</span><span class="dtl">阳光惠生活APP-约惠生活，5折抢本地美食券（部分地区）</span></li>
+  </ul>
+</div>
+
+<div class="bank-card" id="daily-cgb">
+  <div class="bank-hd"><span class="bank-name">广发银行</span><span class="bank-tag hot">返现+8号双引擎</span></div>
+  <ul>
+    <li><span class="ico">📅</span><span class="lbl">每日签到</span><span class="dtl">发现精彩APP签到攒积分/返利金</span></li>
+    <li><span class="ico">🎁</span><span class="lbl">每日超级刷刷刷</span><span class="dtl">单笔满18/88/188元各可领奖1次，每天最多3次，奖品含积分/代金券（多利卡无积分，领代金券即可）</span></li>
+    <li><span class="ico">🍽️</span><span class="lbl">周五超级广发日</span><span class="dtl">5折抢麦当劳/肯德基等代金券（需当月消费满500/2000元）</span></li>
+    <li><span class="ico">🔥</span><span class="lbl">每月8日集中刷天天利</span><span class="dtl">天天利臻享版8倍积分日，缴费/网购/大额消费全安排这天</span></li>
+    <li><span class="ico">🔍</span><span class="lbl">白金俱乐部专区</span><span class="dtl">发现精彩APP会员中心，周五抽积分/黄金红包/各类券</span></li>
+  </ul>
+</div>
+
+<div class="bank-card" id="daily-spdb">
+  <div class="bank-hd"><span class="bank-name">浦发银行</span><span class="bank-tag hot">茶咖天花板</span></div>
+  <ul>
+    <li><span class="ico">☕</span><span class="lbl">每日茶咖半价</span><span class="dtl"><strong>每天10:00起</strong>，喜茶9.5元(19-)、茶百道8元(16-)、霸王茶姬8元(16-)、古茗8元(16-)、奈雪9.5元(19-)、瑞幸9.9元、蜜雪1元(5-)，<strong>每人每月可买2次</strong>，每品牌200份/天</span></li>
+    <li><span class="ico">⭐</span><span class="lbl">每日星巴克积分特惠</span><span class="dtl">19元 + 2.6万积分换中杯饮品券，600份/天</span></li>
+    <li><span class="ico">🔥</span><span class="lbl">周六1元购茶咖</span><span class="dtl"><strong>10:00起</strong>，1元购瑞幸/蜜雪/喜茶/霸王/奈雪等（每月限1次），每人每活动日限购1次</span></li>
+    <li><span class="ico">🛒</span><span class="lbl">周一周二京东满99减10</span><span class="dtl">京东PLUS联名卡，每周限1次</span></li>
+    <li><span class="ico">🍜</span><span class="lbl">美团外卖满30减8</span><span class="dtl">美团外卖使用浦发卡支付</span></li>
+  </ul>
+</div>
+
+<div class="bank-card" id="daily-pa">
+  <div class="bank-hd"><span class="bank-name">平安银行</span><span class="bank-tag hot">天天红包</span></div>
+  <ul>
+    <li><span class="ico">🧧</span><span class="lbl">每日·天天红包</span><span class="dtl">每日首笔任意消费后24小时内可抽1次红包，最高888元立减金</span></li>
+    <li><span class="ico">🎫</span><span class="lbl">每日·天天支付领免单券</span><span class="dtl">借记卡消费满10元领免单券（6/25-7/31），每日限1次</span></li>
+    <li><span class="ico">💳</span><span class="lbl">每日·积分当钱花</span><span class="dtl">开通后在支付宝/京东/抖音/携程等平台直接积分抵现</span></li>
+    <li><span class="ico">🎁</span><span class="lbl">每周二·福利日</span><span class="dtl">资产达标万元，每周二抢购福利专区商品</span></li>
+    <li><span class="ico">🎁</span><span class="lbl">每周三·周周领好礼</span><span class="dtl">支付会员每周三领微信立减金（最高88.88元）</span></li>
+    <li><span class="ico">⛽</span><span class="lbl">每周五·好车主抢加油券</span><span class="dtl">100减50 / 50减25，入口：平安好车主小程序领券中心</span></li>
+  </ul>
+</div>
+
+<!-- ===== 积分回报率分析 ===== -->
+<h2 class="section-title" id="roi" style="margin-top:48px"><span class="icon">📊</span> 五、积分回报率分析：谁能跑赢0.26%手续费？</h2>
+<p style="color:#64748b;font-size:14px;margin:0 0 20px;line-height:1.8;">
+  如果你使用个人收款码或第三方支付通道，通常有<strong style="color:#dc2626">0.26%</strong>左右的刷卡手续费。
+  下面计算每张卡「无脑刷」时，积分回报率能否覆盖这笔成本。
+</p>
+
+<div style="overflow-x:auto;margin-bottom:24px">
+<table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+<thead>
+<tr style="background:#0f172a;color:#fff">
+  <th style="padding:10px 8px;text-align:left;white-space:nowrap">银行</th>
+  <th style="padding:10px 8px;text-align:center;white-space:nowrap">基础比例</th>
+  <th style="padding:10px 8px;text-align:center;white-space:nowrap">最佳兑换</th>
+  <th style="padding:10px 8px;text-align:center;white-space:nowrap">每分价值</th>
+  <th style="padding:10px 8px;text-align:center;white-space:nowrap">基础回报</th>
+  <th style="padding:10px 8px;text-align:center;white-space:nowrap">多倍后回报</th>
+  <th style="padding:10px 8px;text-align:center;white-space:nowrap">判 定</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background:#f0fdf4">
+  <td style="padding:10px 8px;font-weight:700">🥈 农行·尊然白</td>
+  <td style="padding:10px 8px;text-align:center">1元=1分<span style="font-size:11px;color:#94a3b8"><br>+5倍包=6倍</span></td>
+  <td style="padding:10px 8px;text-align:center">航空里程 25:1<br>4.17:1(叠6倍)</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.49%</td>
+  <td style="padding:10px 8px;text-align:center">0.20%</td>
+  <td style="padding:10px 8px;text-align:center;color:#059669;font-weight:700">约0.49%(净)</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">覆盖</span></td>
+</tr>
+<tr style="background:#fef2f2">
+  <td style="padding:10px 8px;font-weight:700">农行·其他4卡</td>
+  <td style="padding:10px 8px;text-align:center">1元=1分</td>
+  <td style="padding:10px 8px;text-align:center">航空里程 40:1<br>6.67:1(叠6倍)</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.13%</td>
+  <td style="padding:10px 8px;text-align:center;color:#dc2626">0.05%</td>
+  <td style="padding:10px 8px;text-align:center;color:#dc2626">约0.13%(净)</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#dc2626;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">不覆盖</span></td>
+</tr>
+<tr style="background:#f0fdf4">
+  <td style="padding:10px 8px;font-weight:700">🥈 浦发</td>
+  <td style="padding:10px 8px;text-align:center">1元=1分<span style="font-size:11px;color:#94a3b8"><br>联名卡自动转</span></td>
+  <td style="padding:10px 8px;text-align:center">南航联名 15:1<br>自动转里程</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.33%</td>
+  <td style="padding:10px 8px;text-align:center;color:#059669">0.33%</td>
+  <td style="padding:10px 8px;text-align:center;color:#059669;font-weight:700">≈0.33%(净)</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">覆盖</span></td>
+</tr><tr style="background:#fef2f2">
+  <td style="padding:10px 8px;font-weight:700">建行</td>
+  <td style="padding:10px 8px;text-align:center">1元=1分<span style="font-size:11px;color:#dc2626"><br>欢享卡不计分</span></td>
+  <td style="padding:10px 8px;text-align:center">龙积分 700:1<br>抵加油/话费</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.14%</td>
+  <td style="padding:10px 8px;text-align:center;color:#dc2626">0.14%</td>
+  <td style="padding:10px 8px;text-align:center">—</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#dc2626;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">不覆盖</span></td>
+</tr>
+<tr style="background:#f0fdf4">
+  <td style="padding:10px 8px;font-weight:700">🥇 广发</td>
+  <td style="padding:10px 8px;text-align:center">多利:无积分体系</td>
+  <td style="padding:10px 8px;text-align:center">多利返利金 100:1签账额</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">1.00%</td>
+  <td style="padding:10px 8px;text-align:center;color:#059669">1.00%</td>
+  <td style="padding:10px 8px;text-align:center">天天利8号×8 = 2.16%</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">碾压</span></td>
+</tr>
+<tr>
+  <td style="padding:10px 8px;font-weight:700">广发</td>
+  <td style="padding:10px 8px;text-align:center">天天利:1元=1分</td>
+  <td style="padding:10px 8px;text-align:center">天天利→南航里程 10万≈270元</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.27%</td>
+  <td style="padding:10px 8px;text-align:center;color:#dc2626">0.27%</td>
+  <td style="padding:10px 8px;text-align:center">8号×8 = 2.16%<br><span style="color:#dc2626">但288元年费需分摊</span></td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#eab308;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">8号可飞</span></td>
+</tr>
+<tr style="background:#f0fdf4">
+  <td style="padding:10px 8px;font-weight:700">🥈 光大</td>
+  <td style="padding:10px 8px;text-align:center">1元=4分</td>
+  <td style="padding:10px 8px;text-align:center">航空里程 18:1</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">1.11%</td>
+  <td style="padding:10px 8px;text-align:center;color:#059669;font-weight:700">1.11%</td>
+  <td style="padding:10px 8px;text-align:center">生日月叠加 ≈2.22%</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">碾压</span></td>
+</tr>
+<tr>
+  <td style="padding:10px 8px;font-weight:700">中行</td>
+  <td style="padding:10px 8px;text-align:center">1元=1分</td>
+  <td style="padding:10px 8px;text-align:center">南航里程 30:1</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.27%</td>
+  <td style="padding:10px 8px;text-align:center;color:#eab308">0.27%</td>
+  <td style="padding:10px 8px;text-align:center">活动日 ×2 = 0.54%</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#2563eb;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">可覆盖</span></td>
+</tr>
+<tr style="background:#fff7ed">
+  <td style="padding:10px 8px;font-weight:700">建行</td>
+  <td style="padding:10px 8px;text-align:center">1元=1分</td>
+  <td style="padding:10px 8px;text-align:center">非汽车卡换加油卡</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.18%</td>
+  <td style="padding:10px 8px;text-align:center;color:#dc2626">0.18%</td>
+  <td style="padding:10px 8px;text-align:center">—</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#dc2626;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">不覆盖</span></td>
+</tr>
+<tr style="background:#fff7ed">
+  <td style="padding:10px 8px;font-weight:700">工行</td>
+  <td style="padding:10px 8px;text-align:center">1元=1分</td>
+  <td style="padding:10px 8px;text-align:center">话费/加油卡</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.20%</td>
+  <td style="padding:10px 8px;text-align:center;color:#dc2626">0.20%</td>
+  <td style="padding:10px 8px;text-align:center">无多倍积分包</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#dc2626;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">不覆盖</span></td>
+</tr>
+<tr style="background:#fff7ed">
+  <td style="padding:10px 8px;font-weight:700">平安</td>
+  <td style="padding:10px 8px;text-align:center">月5笔18元<span style="font-size:11px;color:#94a3b8"><br>兑券33-55%回报</span></td>
+  <td style="padding:10px 8px;text-align:center">百变好礼兑换券<span style="font-size:11px;color:#94a3b8"><br>年价值≈480元</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">33%</td>
+  <td style="padding:10px 8px;text-align:center;color:#059669">33%（券）</td>
+  <td style="padding:10px 8px;text-align:center">生日月5倍 = 1%</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">低消神卡</span></td>
+  <td style="padding:10px 8px;text-align:center">买包5倍 = 1%</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#f97316;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">有条件</span></td>
+</tr>
+<tr style="background:#f0fdf4">
+  <td style="padding:10px 8px;font-weight:700">邮储·青春卡</td>
+  <td style="padding:10px 8px;text-align:center">1%兑换点</td>
+  <td style="padding:10px 8px;text-align:center">5元券 / 视频月卡</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.50~2.00%</td>
+  <td style="padding:10px 8px;text-align:center;color:#059669">0.50~2.00%</td>
+  <td style="padding:10px 8px;text-align:center">—</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">覆盖</span></td>
+</tr>
+<tr>
+  <td style="padding:10px 8px;font-weight:700">邮储·鼎致白</td>
+  <td style="padding:10px 8px;text-align:center">1元=1分(六2倍)</td>
+  <td style="padding:10px 8px;text-align:center">20万分抵2600元年费</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.10%</td>
+  <td style="padding:10px 8px;text-align:center">0.10~0.20%</td>
+  <td style="padding:10px 8px;text-align:center;color:#059669">1.30%(抵年费)</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#f97316;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">有条件</span></td>
+</tr>
+<tr style="background:#fef2f2">
+  <td style="padding:10px 8px;font-weight:700">邮储·小绿卡</td>
+  <td style="padding:10px 8px;text-align:center">1元=1分</td>
+  <td style="padding:10px 8px;text-align:center">咖啡券/视频</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">0.10%</td>
+  <td style="padding:10px 8px;text-align:center;color:#dc2626">0.10%</td>
+  <td style="padding:10px 8px;text-align:center">生日月2倍=0.20%</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#dc2626;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px">不覆盖</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:24px">
+<h4 style="margin:0 0 14px;font-size:16px">💡 每张卡的详细分析</h4>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;font-size:13px;line-height:1.8">
+
+<div style="background:#f0fdf4;border-radius:8px;padding:14px">
+<strong style="color:#059669">👑 农行·尊然白金卡（万事达） — 高端真·无脑刷!</strong><br>
+<strong style="color:#ea580c">⚠️ 关键确认：你持有的尊然白是高端白金卡！</strong>里程兑换<span style="color:#059669;font-weight:700">25:1</span>，叠6倍包≈4.17:1。<br>
+<strong>月消费1万净回报：</strong><span style="color:#059669;font-weight:700">≈0.49%</span>，稳超0.26%手续费。<br>
+<strong>积分优先用途：</strong>①10万分抵880元年费（回报0.88%）→ ②兑换接送机（10万分/次）→ ③换航空里程（25:1）<br>
+<strong>买包建议：</strong>46.6元/月多渠道5倍包 + 可选加微信5倍包(19.9元/月)。买包后所有7大渠道消费走尊然白，积分自动累积。<br>
+<strong>年费策略：</strong>首年880元，攒10万积分即可抵扣，相当于免费持有。<br>
+<span style="color:#94a3b8">尊然白是你农行5张卡里唯一值得买5倍包跑回报的卡。其他4张别碰积分包。</span>
+</div>
+
+<div style="background:#fefce8;border-radius:8px;padding:14px">
+<strong style="color:#eab308">🔥 农行积分策略总结（5张卡分工）</strong><br>
+<strong style="color:#059669">尊然白 → 买5倍包，7大渠道走这张，攒分换里程，净回报0.49%。</strong>日常主力刷。<br>
+<strong style="color:#8b5cf6">超然商务卡 → 境外消费用这张，免货转+返现。国内消费达标换高铁/机票券。</strong><br>
+<strong style="color:#ea580c">车主畅享版 → 加油/充电专用。月消费888元即达标领加油券(200-20)，超38%回报！充电满30减20更夸张(67%回报)。</strong><br>
+车主尊享版 → 里程已废(40:1)，但1元洗车+1元代驾+免费救援仍值，消费满3万免年费。<br>
+悦卡 → 消费达标月月兑小羊毛（视频会员/咖啡券），普卡无持有成本。<br>
+<span style="color:#94a3b8">一句话：尊然白负责攒分和出行，畅享版负责加油充电，超然负责境外，车主尊享和悦卡随缘。</span>
+</div>
+
+<div style="background:#f0fdf4;border-radius:8px;padding:14px">
+<strong style="color:#059669">🥈 浦发 — 南航联名卡，真正的无脑刷</strong><br>
+<strong>南航联名白金卡：</strong>15:1自动转南航里程，1元消费=0.0667里程<br>
+<strong>回报率：</strong><span style="color:#059669;font-weight:700">0.33%</span>，稳超0.26%手续费<br>
+<strong>零额外成本：</strong>不需要买5倍积分包，不需要手动兑换，积分自动转里程到南航账户<br>
+<strong>年费：</strong>360元/年，首年免，刷6次免次年，几乎零持有成本<br>
+<strong>全渠道计积分：</strong>微信/支付宝/京东/美团等主流网付全计，日常消费无死角<br>
+<span style="color:#94a3b8">这是你手里最省心的一张卡——自动转里程，0.33%稳定覆盖手续费，还没有额外月费。</span>
+</div>
+
+<div style="background:#fef2f2;border-radius:8px;padding:14px">
+<strong style="color:#dc2626">建行 — 你没汽车卡，积分回报不达标</strong><br>
+<strong>正青春/全球支付卡：</strong>龙积分700分=1元 → 基础回报<span style="color:#dc2626;font-weight:700">0.14%</span>，远低于0.26%<br>
+<strong>欢享卡：</strong><span style="color:#dc2626;font-weight:700">不计积分！</span>但笔笔随机返现（月30次）是真正的价值点，靠返现不靠积分<br>
+<span style="color:#94a3b8">建行的正确用法：欢享卡刷小额吃返现，全球支付卡留出境用，积分随缘不硬攒。</span>
+</div>
+
+<div style="background:#f0fdf4;border-radius:8px;padding:14px">
+<strong style="color:#059669">🥇 广发多利白金卡 — 1%返现无脑刷，碾压级</strong><br>
+<strong>核心机制：</strong>不走积分，走返利金。微信/支付宝/云闪付消费1%返现，美团/星巴克/奈雪/滴滴10%返现（月上限100返利金）。<br>
+<strong>无脑刷回报：</strong>1%，直接碾压0.26%手续费，无需买包、无需凑倍数。<br>
+<strong>兑换条件：</strong>月消费满10笔+累积满20返利金即可兑签账额。月消费2000元（得20返利金）即可触发。<br>
+<strong>年费：</strong>首年免，12笔或绑微信/支付宝/京东免次年，零门槛。<br>
+</div>
+
+<div style="background:#fff7ed;border-radius:8px;padding:14px">
+<strong style="color:#ea580c">广发天天利白金卡臻享版 — 8号限定，年费是硬伤</strong><br>
+<strong>核心：</strong>每月8日交易8倍积分，1元=8分，换南航≈ <span style="color:#eab308">2.16%</span>，单日回报极高。<br>
+<strong>年费：</strong>288元/年<strong>不可减免</strong>，需8号消费约13,333元靠积分回报覆盖年费。<br>
+<strong>策略：</strong>把所有能安排在8号的消费（缴费/网购/大额）都集中到这天，其余日子用多利卡。<br>
+<span style="color:#94a3b8">如果每月8号消费不足5000元，这张卡可能是在亏年费。仅适合能集中消费的用户。</span>
+</div>
+
+<div style="background:#f0fdf4;border-radius:8px;padding:14px">
+<strong style="color:#059669">🥈 光大紫麒麟 — 4倍积分碾压级，无脑刷加值</strong><br>
+<strong>微信/支付宝：</strong>1元=4分，18:1换里程 → 回报率<span style="color:#059669;font-weight:700">1.11%</span>，碾压0.26%<br>
+<strong>月消费1万：</strong>4万分≈2222里程≈111元，年消费12万可得24万里程≈1200元<br>
+<strong>叠加月刷月开心：</strong>加油200-50/100另算，是纯增量<br>
+<strong>附加权益：</strong>代驾4次/年(30km)、贵宾厅5点/年(可携伴3人)<br>
+<span style="color:#94a3b8">年费500元，达标可免。注意积分有效期5年，定期兑换里程。</span>
+</div>
+
+<div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:14px">
+<strong>中行 — 刚好及格线</strong><br>
+<strong>基础：</strong>30:1换南航里程 → <span style="color:#eab308">0.27%</span>，刚刚超过0.26%<br>
+<strong>风险：</strong>只有0.01%的安全边际，如果有积分损耗（无效MCC等），可能跌破<br>
+周末双倍积分、生日月双倍等能拉升，但不够稳定。
+</div>
+
+<div style="background:#fff7ed;border-radius:8px;padding:14px">
+<strong style="color:#ea580c">工行 — i豆回报覆盖不了，但长隆价值极高</strong><br>
+基础0.20%，没有多倍积分包。i豆长期有效但攒得太慢。<br>
+<span style="color:#059669;font-weight:700">但长隆5折门票才是这张卡的真正价值：</span>广州长隆野生动物世界标准票约350元→5折省175元；珠海长隆海洋王国约450元→省225元。每园一次，全家去一趟轻松省上千。<br>
+<span style="color:#94a3b8">i豆随缘攒，日常主要靠每周满减活动。去长隆就是神卡。</span>
+</div>
+
+<div style="background:#f0fdf4;border-radius:8px;padding:14px">
+<strong style="color:#059669">🎁 平安悦享白金卡 — 百变好礼才是主角，积分只是添头</strong><br>
+<strong>这张卡的正确用法不是刷积分，是刷兑换券：</strong><br>
+📌 <strong>月消费5笔×18元=90元</strong> → 得2张兑换券（价值30-50元） → 回报率 <span style="color:#059669;font-weight:700">33%-55%</span>！<br>
+📌 月消费3888元 → 额外+1张券 → 但没必要为了券多刷，5笔18元最划算<br>
+📌 全年24张券（只做5笔达标）：24×平均20元 = <span style="color:#059669;font-weight:700">≈480元</span>，新户第一年36张≈720元<br>
+<strong>积分回报</strong>（资产≥1000元）：0.20%，跑不赢0.26%手续费 → <span style="color:#dc2626">不靠积分</span><br>
+<strong>生日月5倍积分</strong>：回报率1%，值得集中刷<br>
+<span style="color:#94a3b8">结论：每月5笔18元=外卖/咖啡/充话费，轻松拿满券。日常大额消费别走平安，生日月例外。这是一张「低消费高回报」的生活卡，不是无脑刷卡。</span>
+</div>
+
+<div style="background:#f0fdf4;border-radius:8px;padding:14px">
+<strong style="color:#059669">🎓 邮储·青春卡 — 隐藏的无脑刷神卡</strong><br>
+<strong>机制：</strong>微信/支付宝/线下计积分商户消费，每1元=0.01兑换点，非积分！<br>
+<strong>实际回报：</strong>1000消费=5元饿了么/滴滴券 → <span style="color:#059669;font-weight:700">0.50%</span>；1500消费=30元视频月卡 → <span style="color:#059669;font-weight:700">2.00%</span>，均远超0.26%<br>
+<strong>零额外成本：</strong>普卡终身免年费，不需买任何积分包，不计积分但消费即返现。<br>
+<span style="color:#94a3b8">温馨提示：兑换点365天有效，兑视频会员最划算（回报最高）。</span>
+</div>
+
+<div style="background:#eef2ff;border-radius:8px;padding:14px">
+<strong style="color:#4f46e5">👑 邮储·鼎致白金卡 — 高端权益卡，积分抵年费最值</strong><br>
+<strong>年费2600元</strong>可以用<strong>20万积分抵扣</strong> → 积分价值瞬间从0.10%飙升至<span style="color:#4f46e5;font-weight:700">1.30%</span><br>
+<strong>周六2倍积分：</strong>月上限5万分，周末消费集中刷鼎致。<br>
+<strong>核心权益：</strong>6次贵宾厅、2次接送机、1次体检、1次洁牙、无限道路救援，权益价值4000+<br>
+<span style="color:#94a3b8">先攒20万分抵年费是优先级最高的操作。年费抵掉后剩余积分才是你的净利润。</span>
+</div>
+
+<div style="background:#fef2f2;border-radius:8px;padding:14px">
+<strong style="color:#dc2626">🌍 邮储·小绿卡 — 积分覆盖不了，等下一轮活动</strong><br>
+基础0.10%，生日月2倍=0.20%，仍不及0.26%。<br>
+<span style="color:#dc2626">4-6月消费6天礼已结束</span>（领取期至7/31），下半年续期暂未见。积分随缘，重点用活动立减（支付宝天天减、中石化立减等）。<br>
+<span style="color:#94a3b8">小绿卡核心价值在周周享活动，不在积分。境外场景才体现优势。</span>
+</div>
+
+</div>
+</div>
+
+<div class="tips" style="background:#f0f9ff;border-color:#bae6fd;margin-bottom:24px">
+<h4 style="margin:0 0 8px;color:#0369a1">📌 一句话结论</h4>
+<p style="margin:0;font-size:14px;line-height:1.8;color:#0c4a6e">
+  <strong>真正能「无脑刷」靠积分/返现跑赢 0.26% 手续费的方案：</strong><br>
+  ① <span style="background:#059669;color:#fff;padding:1px 6px;border-radius:3px">广发多利白金卡</span> → 微信/支付宝1%返现，净回报 <strong>≈1.00%</strong>，最简单直接的碾压方案<br>
+  ② <span style="background:#059669;color:#fff;padding:1px 6px;border-radius:3px">光大紫麒麟</span> → 微信/支付宝4倍积分，18:1换里程，净回报 <strong>≈1.11%</strong>，附带代驾+贵宾厅<br>
+  ③ <span style="background:#059669;color:#fff;padding:1px 6px;border-radius:3px">邮储青春卡</span> → 消费1%返兑换点，兑视频月卡回报 <strong>≈2.00%</strong>，普卡终身免年费<br>
+  ④ <span style="background:#059669;color:#fff;padding:1px 6px;border-radius:3px">浦发南航联名白金卡</span> → 15:1自动转里程，净回报 <strong>≈0.33%</strong>，零额外成本<br>
+  ⑤ <span style="background:#059669;color:#fff;padding:1px 6px;border-radius:3px">农行尊然白金卡</span> + 5倍积分包(46.6元/月) → 净回报 <strong>≈0.49%</strong>，附赠6次贵宾厅+接送机+预约挂号<br><br>
+  <strong style="color:#ea580c">建行欢享卡</strong>靠笔笔返现（非积分）也能跑赢。<br>
+  <strong style="color:#dc2626">农行其他4张卡（超然商务/车主双卡/悦卡）积分回报均不及0.26%——但各有专属玩法：畅享版加油200-20、超然境外返现、悦卡消费达标兑。别买积分包，用活动立减。</strong><br>
+  <span style="color:#94a3b8">其余卡种如果看重积分回报，建议只在多倍活动/生日月刷，平时靠活动立减更实在。</span>
+</p>
+</div>
+
+<!-- ===== 用卡策略 ===== -->
+<div class="tips" id="tactics">
+  <h3>六、你的用卡组合策略</h3>
+  <ul>
+    <li><strong>日常无脑刷 #1</strong> → <span style="color:#059669">广发多利白金卡</span>：微信/支付宝1%返现，最简单直接，不用算积分倍数不用买包。月消费2000元即可触发兑换。</li>
+    <li><strong>日常无脑刷 #2</strong> → <span style="color:#059669">光大紫麒麟</span>：微信/支付宝4倍积分，回报1.11%。叠加代驾+贵宾厅+加油返现，全能王。</li>
+    <li><strong>日常无脑刷 #3</strong> → <span style="color:#059669">浦发南航联名白金卡</span>：15:1自动转南航里程，回报0.33%，全渠道计积分，零操心。</li>
+    <li><strong>日常消费返现</strong> → <span style="color:#059669">邮储青春卡</span>：微信/支付宝消费1%返兑换点，兑视频月卡回报2.00%，普卡终身免年费。</li>
+    <li><strong>每月8号集中消费</strong> → <span style="color:#ea580c">广发天天利臻享版</span>：8倍积分日，把缴费/网购/大额全安排这天。但288元年费不可免，需算清是否值。</li>
+    <li><strong>小额随机返现</strong> → <span style="color:#2563eb">建行欢享卡</span>：境内笔笔满10元随机返0.1~99元（月30次），返现直接到账。</li>
+    <li><strong>支付宝随手减</strong> → <span style="color:#ea580c">邮储全卡</span>：支付宝满10减1每月6次，满50减5每月1次，三张邮储卡均可用。</li>
+    <li><strong>高端权益出行</strong> → <span style="color:#4f46e5">邮储鼎致白</span>：6次贵宾厅+2次接送机+1次体检+无限救援，优先攒20万积分抵掉2600元年费。</li>
+    <li><strong>周五餐饮/咖啡</strong> → <span style="color:#2563eb">光大</span>（星巴克40-15、肯德基30-10）+ <span style="color:#2563eb">广发</span>（超级广发日5折饭票），周五专属组合。</li>
+    <li><strong>日常无脑刷 #5</strong> → <span style="color:#059669">农行尊然白金卡</span>：买5倍积分包(46.6元/月)，7大渠道消费全部走尊然白，积分优先抵年费(10万分=880元)→兑接送机→换里程(25:1)。净回报0.49%。</li>
+    <li><strong>加油/充电</strong> → <span style="color:#059669">农行车主畅享版</span>：月消费888元达标，次月领加油券(200-20)或充电券(30-20)，充电66折比加油划算太多。另可叠加 <span style="color:#059669">光大紫麒麟</span> 的月刷月开心加油返现。</li>
+    <li><strong>车主养护</strong> → <span style="color:#ea580c">农行车主尊享版/畅享版</span>：每月1次1元洗车、每季度1次1元代驾、免费道路救援，养车成本降到最低。</li>
+    <li><strong>境外消费</strong> → <span style="color:#8b5cf6">农行万事达超然商务卡</span>：免货转+境外返现，有效期内免年费零持有成本。</li>
+    <li><strong>电商大额</strong> → <span style="color:#2563eb">浦发</span>（京东满减），搭配淘宝天猫分期可用<span style="color:#ea580c">平安悦享白</span>（满500-25/满1500-75）。</li>
+    <li><strong>抖音/美团</strong> → <span style="color:#ea580c">农行</span>（抖音满200随机减28、美团首绑减18）。</li>
+    <li><strong>大额集中消费</strong> → <span style="color:#ea580c">中行</span>（达标抽最高999元立减金），适合把大额支出集中到中行刷。</li>
+    <li><strong>外卖/咖啡/追剧</strong> → <span style="color:#059669">平安悦享白金卡</span>：月消费5笔18元拿2张兑换券，兑视频会员/咖啡/外卖券，低消费高回报。每月90元消费撬动40-50元价值。</li>
+    <li><strong>茶咖每日</strong> → <span style="color:#2563eb">浦发</span>每天半价茶咖（7品牌）+ 周六1元购，咖啡奶茶自由。</li>
+  </ul>
+</div>
+
+<!-- ===== 月度额度计划 ===== -->
+<h2 class="section-title" id="monthly-plan" style="margin-top: 48px;"><span class="icon">📊</span> 七、月度用卡额度计划表 <span style="font-size:13px;font-weight:400;color:#94a3b8">（月消费80,000元 · 双轨制）</span></h2>
+
+<div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:24px">
+
+<!-- 前置说明 -->
+<div style="display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap">
+<div style="flex:1;min-width:280px;background:linear-gradient(135deg,#f0fdf4 0%,#dcfce7 100%);border:1px solid #86efac;border-radius:10px;padding:16px">
+  <div style="font-weight:700;color:#059669;margin-bottom:6px;font-size:15px">🟢 无手续费轨道 — 35,000元</div>
+  <div style="font-size:13px;color:#166534;line-height:1.8">零成本消费，无需考虑回报率门槛。<br>优先分配给达标任务 + 纯回报卡 → 全部净赚。</div>
+</div>
+<div style="flex:1;min-width:280px;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);border:1px solid #fcd34d;border-radius:10px;padding:16px">
+  <div style="font-weight:700;color:#eab308;margin-bottom:6px;font-size:15px">🟡 有手续费轨道 — 45,000元</div>
+  <div style="font-size:13px;color:#92400e;line-height:1.8">成本0.26%，必须回报率 > 0.26%。<br>微信渠道搭配「满1000减3」券，额外+0.30% 秒杀手续费。</div>
+</div>
+</div>
+
+<div style="background:#eff6ff;border:1px solid #93c5fd;border-radius:8px;padding:14px;margin-bottom:20px">
+<strong style="color:#1e40af">💡 核心逻辑：</strong><span style="font-size:14px;color:#475569">把<strong>有手续费的额度全部走微信渠道</strong>并搭配1000-3券。券本身给0.30%回报，叠加卡本身的积分/返现，任何一张主力卡的组合回报都能轻松碾压0.26%手续费。</span>
+</div>
+
+<!-- ===== 双轨分配表 ===== -->
+<table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:24px">
+<thead>
+<tr style="background:#0f172a;color:#fff">
+  <th style="padding:10px 8px;text-align:left;width:16%">卡片</th>
+  <th style="padding:10px 8px;text-align:center;width:12%">轨道</th>
+  <th style="padding:10px 8px;text-align:center;width:12%">月分配额度</th>
+  <th style="padding:10px 8px;text-align:left;width:24%">渠道 / 场景</th>
+  <th style="padding:10px 8px;text-align:center;width:14%">回报率<br><span style="font-size:11px;font-weight:400">含券后</span></th>
+  <th style="padding:10px 8px;text-align:center;width:12%">月收益</th>
+  <th style="padding:10px 8px;text-align:center;width:10%">指令</th>
+</tr>
+</thead>
+<tbody>
+
+<!-- 无手续费轨道表头 -->
+<tr style="background:#f0fdf4">
+  <td colspan="7" style="padding:8px 12px;font-weight:700;color:#059669;font-size:13px">
+    🟢 无手续费轨道 — 35,000元（零成本，全部净赚）
+  </td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">平安悦享白</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">无手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">90</td>
+  <td style="padding:10px 8px;font-size:13px">外卖/咖啡/话费/便利店，5笔×18元</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">44~55%</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">≈45元</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">达标即停</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">农行畅享版</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">无手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">888</td>
+  <td style="padding:10px 8px;font-size:13px">加油/充电</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">2.25%</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">≈20元</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">达标即停</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">农行悦卡</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">无手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">888</td>
+  <td style="padding:10px 8px;font-size:13px">日常零散消费</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">1.7~2.8%</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">≈20元</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">达标即停</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">邮储青春卡</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">无手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">1,000</td>
+  <td style="padding:10px 8px;font-size:13px">日常穿插，攒兑换点兑视频月卡</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">2.00%</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">≈20元</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">穿插备用</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">建行欢享卡</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">无手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">500</td>
+  <td style="padding:10px 8px;font-size:13px">微信小额多笔，吃笔笔返现</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">≈3%<br><span style="font-size:11px;color:#94a3b8">小额返现</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">≈15元</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">混返现</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">光大紫麒麟</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">无手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#2563eb">10,000</td>
+  <td style="padding:10px 8px;font-size:13px">微信/支付宝，达标月刷月开心</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#2563eb">2.11%<br><span style="font-size:11px;color:#94a3b8">含加油券</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#2563eb">≈211元</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#2563eb;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">达标即停</span><br><span style="font-size:11px;color:#94a3b8">超额走有手续费轨</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">广发多利白</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">无手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">15,000</td>
+  <td style="padding:10px 8px;font-size:13px">微信/支付宝日常消费</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">1.00%</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">≈150元</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">主力无脑刷</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">农行尊然白</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">无手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700">≈5,634</td>
+  <td style="padding:10px 8px;font-size:13px">7大渠道（微信/支付宝/京东/美团/抖音/拼多多/携程）</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#eab308">0.49%</td>
+  <td style="padding:10px 8px;text-align:center;color:#eab308">≈28元</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#eab308;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">无成本攒分</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;color:#64748b">保活卡组（8张）</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">无手续</span></td>
+  <td style="padding:10px 8px;text-align:center">≈1,000</td>
+  <td style="padding:10px 8px;font-size:13px;color:#94a3b8">各1笔：建行正青春/全球支付、邮储鼎致/小绿、中行、工行长隆、农行尊享/超然</td>
+  <td style="padding:10px 8px;text-align:center;color:#94a3b8">—</td>
+  <td style="padding:10px 8px;text-align:center;color:#94a3b8">保年费</td>
+  <td style="padding:10px 8px;text-align:center;font-size:13px"><span style="background:#94a3b8;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">保活即可</span></td>
+</tr>
+
+<tr style="background:#f0fdf4">
+  <td style="padding:10px 8px;font-weight:700;color:#059669" colspan="2">🟢 无手续费合计</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669;font-size:16px">35,000</td>
+  <td colspan="2" style="padding:10px 8px;font-size:13px;color:#059669">零成本，全部净赚</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669;font-size:16px">≈509元</td>
+  <td style="padding:10px 8px;text-align:center"></td>
+</tr>
+
+<!-- 有手续费轨道表头 -->
+<tr style="background:#fef3c7">
+  <td colspan="7" style="padding:8px 12px;font-weight:700;color:#eab308;font-size:13px">
+    🟡 有手续费轨道 — 45,000元（成本0.26%，微信渠道配1000-3券额外+0.30%）
+  </td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">光大紫麒麟<span style="font-size:11px;color:#94a3b8"><br>超额部分</span></td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#eab308;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">有手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#2563eb">20,000</td>
+  <td style="padding:10px 8px;font-size:13px"><strong>其中微信10,000</strong>（配券）<br>支付宝10,000（无券）</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#2563eb">1.11%<br><span style="font-size:11px;color:#059669">微信+券=1.41%</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#2563eb">≈252元<br><span style="font-size:11px;color:#94a3b8">回报252-费269<br>=净赚217</span></td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#2563eb;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">主力输出</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">农行尊然白<span style="font-size:11px;color:#94a3b8"><br>补满5倍包</span></td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#eab308;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">有手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#eab308">≈14,366</td>
+  <td style="padding:10px 8px;font-size:13px"><strong>全部走微信</strong>（配券）<br>7大渠道，5倍包共上限2万</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#eab308">0.49%<br><span style="font-size:11px;color:#059669">+券=0.79%</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#eab308">≈70元<br><span style="font-size:11px;color:#94a3b8">回报70-费37<br>+券43=净赚76</span></td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#eab308;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">补满2万</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">广发多利白<span style="font-size:11px;color:#94a3b8"><br>补满返利金</span></td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#eab308;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">有手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">5,000</td>
+  <td style="padding:10px 8px;font-size:13px"><strong>全部走微信</strong>（配券）<br>返利金总上限200元（月2万）</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">1.00%<br><span style="font-size:11px;color:#059669">+券=1.30%</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#059669">≈50元<br><span style="font-size:11px;color:#94a3b8">回报50-费13<br>+券15=净赚52</span></td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#059669;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">补满2万</span></td>
+</tr>
+
+<tr>
+  <td style="padding:10px 8px;font-weight:700">浦发南航白</td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#eab308;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px">有手续</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#94a3b8">≈5,634</td>
+  <td style="padding:10px 8px;font-size:13px"><strong>微信</strong>（配券）穿插备用<br>15:1自动转南航里程</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#94a3b8">0.33%<br><span style="font-size:11px;color:#059669">+券=0.63%</span></td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#94a3b8">≈19元<br><span style="font-size:11px;color:#94a3b8">回报19-费15<br>+券17=净赚21</span></td>
+  <td style="padding:10px 8px;text-align:center"><span style="background:#94a3b8;color:#fff;padding:3px 10px;border-radius:12px;font-size:12px">穿插消化</span></td>
+</tr>
+
+<tr style="background:#fef3c7">
+  <td style="padding:10px 8px;font-weight:700;color:#eab308" colspan="2">🟡 有手续费合计</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#eab308;font-size:16px">45,000</td>
+  <td style="padding:10px 8px;font-size:13px;color:#eab308">其中微信约30,000（配券）×0.30% = 90元券收益</td>
+  <td style="padding:10px 8px;text-align:center;font-size:13px;color:#eab308">回报391-成本117+券90</td>
+  <td style="padding:10px 8px;text-align:center;font-weight:700;color:#eab308;font-size:16px">净赚≈364元</td>
+  <td style="padding:10px 8px;text-align:center"></td>
+</tr>
+
+</tbody>
+</table>
+
+<!-- 总收益汇总 -->
+<div style="display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap">
+  <div style="flex:1;min-width:200px;background:linear-gradient(135deg,#059669 0%,#047857 100%);border-radius:12px;padding:18px;color:#fff;text-align:center">
+    <div style="font-size:12px;opacity:0.8;margin-bottom:4px">无手续费轨道净赚</div>
+    <div style="font-size:28px;font-weight:800">≈509元</div>
+    <div style="font-size:12px;opacity:0.7;margin-top:2px">回报率 ≈1.45%</div>
+  </div>
+  <div style="flex:1;min-width:200px;background:linear-gradient(135deg,#eab308 0%,#ca8a04 100%);border-radius:12px;padding:18px;color:#fff;text-align:center">
+    <div style="font-size:12px;opacity:0.8;margin-bottom:4px">有手续费轨道净赚</div>
+    <div style="font-size:28px;font-weight:800">≈364元</div>
+    <div style="font-size:12px;opacity:0.7;margin-top:2px">净回报率 ≈0.81%</div>
+  </div>
+  <div style="flex:1;min-width:200px;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-radius:12px;padding:18px;color:#fff;text-align:center">
+    <div style="font-size:12px;opacity:0.8;margin-bottom:4px">月度总净赚</div>
+    <div style="font-size:28px;font-weight:800">≈873元</div>
+    <div style="font-size:12px;opacity:0.7;margin-top:2px">综合净回报率 ≈1.09%<br><span style="font-size:10px">年化 ≈10,476元</span></div>
+  </div>
+</div>
+
+<!-- 微信券使用指南 -->
+<div style="background:#f0f9ff;border:2px dashed #38bdf8;border-radius:10px;padding:18px;margin-bottom:20px">
+  <h4 style="margin:0 0 10px;color:#0369a1">🎫 微信满1000-3优惠券 · 使用策略</h4>
+  <div style="font-size:14px;color:#0c4a6e;line-height:1.9">
+    <strong>核心价值：</strong>每笔1000元微信消费额外返0.30%，叠加任何卡的自身回报都能秒杀0.26%手续费。<br>
+    <strong>使用原则：</strong><br>
+    ① <strong>优先给有手续费的消费用——</strong>在有手续费轨道，券的价值 = 帮你把卡回报从"勉强覆盖"变成"轻松碾压"。<br>
+    ② <strong>不要给无手续费的消费用——</strong>浪费！无手续费轨道本身零成本，券的价值无法体现。<br>
+    ③ <strong>凑整消费——</strong>尽量把微信消费凑到1000的倍数，最大化券的收益。比如微信消费10500元用完10张券(返30元)，剩500走支付宝。<br>
+    ④ <strong>按表分配：</strong>光大(微信10000→10张券→返30元) + 尊然白(微信14366→14张券→返42元) + 多利(微信5000→5张券→返15元) + 浦发(微信5634→5张券→返15元) ≈ <strong>月返约102元</strong>。<br>
+    <span style="color:#94a3b8;font-size:12px">* 券的数量和面额以微信支付实际发放为准，此处以满1000-3为例估算。</span>
+  </div>
+</div>
+
+<!-- 月执行清单 -->
+<div style="background:#f8fafc;border-radius:10px;padding:18px;border:1px solid #e2e8f0">
+  <h4 style="margin:0 0 14px;color:#334155">📋 月度执行清单（按顺序执行）</h4>
+  <table style="width:100%;border-collapse:collapse;font-size:13px">
+  <thead>
+    <tr style="background:#e2e8f0">
+      <th style="padding:8px;text-align:center;width:6%">步</th>
+      <th style="padding:8px;text-align:left;width:22%">做什么</th>
+      <th style="padding:8px;text-align:left;width:47%">怎么操作</th>
+      <th style="padding:8px;text-align:center;width:25%">刷卡额度</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid #e2e8f0">
+      <td style="padding:8px;text-align:center;font-weight:700">1</td>
+      <td style="padding:8px"><strong>月初达标任务</strong></td>
+      <td style="padding:8px;font-size:13px;color:#475569">平安悦享白刷5笔18元（外卖/咖啡/话费）；农行畅享版加油充电888元；农行悦卡日常消费888元</td>
+      <td style="padding:8px;text-align:center;font-weight:700">1,866</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e2e8f0">
+      <td style="padding:8px;text-align:center;font-weight:700">2</td>
+      <td style="padding:8px"><strong>光大月刷月开心达标</strong></td>
+      <td style="padding:8px;font-size:13px;color:#475569">紫麒麟刷微信/支付宝满10,000元。<span style="color:#ea580c">必须报名！</span>达标后领200-100加油券</td>
+      <td style="padding:8px;text-align:center;font-weight:700">10,000</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e2e8f0">
+      <td style="padding:8px;text-align:center;font-weight:700">3</td>
+      <td style="padding:8px"><strong>备好5倍积分包</strong></td>
+      <td style="padding:8px;font-size:13px;color:#475569">农行掌银APP购买5倍积分包（46.6元/月），次月生效。确认本月在有效期内</td>
+      <td style="padding:8px;text-align:center;color:#94a3b8">—</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e2e8f0">
+      <td style="padding:8px;text-align:center;font-weight:700">4</td>
+      <td style="padding:8px"><strong>主力日常消费</strong></td>
+      <td style="padding:8px;font-size:13px;color:#475569">广发多利白（微信/支付宝）15,000元 + 邮储青春卡1,000元 + 建行欢享500元</td>
+      <td style="padding:8px;text-align:center;font-weight:700">16,500</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e2e8f0">
+      <td style="padding:8px;text-align:center;font-weight:700">5</td>
+      <td style="padding:8px"><strong>农行尊然白攒分</strong></td>
+      <td style="padding:8px;font-size:13px;color:#475569">7大渠道消费尽量走尊然白，刷满5倍包2万上限。<strong style="color:#ea580c">有手续费的部分全部走微信+配券</strong></td>
+      <td style="padding:8px;text-align:center;font-weight:700">20,000</td>
+    </tr>
+    <tr style="border-bottom:1px solid #e2e8f0">
+      <td style="padding:8px;text-align:center;font-weight:700">6</td>
+      <td style="padding:8px"><strong>保活+穿插</strong></td>
+      <td style="padding:8px;font-size:13px;color:#475569">光大超额20,000 + 浦发南航5,634 + 保活卡8笔1,000。剩余额度都给光大（回报最高）</td>
+      <td style="padding:8px;text-align:center;font-weight:700">26,634</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;text-align:center;font-weight:700">7</td>
+      <td style="padding:8px"><strong>月底对账</strong></td>
+      <td style="padding:8px;font-size:13px;color:#475569">检查各APP：光大加油券是否到账、平安兑换券是否可用、农行5倍包积分是否到账、广发返利金是否累计</td>
+      <td style="padding:8px;text-align:center;font-weight:700;color:#059669;font-size:16px">≈873元</td>
+    </tr>
+  </tbody>
+  </table>
+
+  <div style="margin-top:14px;font-size:13px;color:#64748b;line-height:1.8">
+    <strong>📌 关键提醒：</strong><br>
+    • 农行尊然白<strong>5倍积分包月上限10万分（对应消费2万元）</strong>，超出的部分只有基础积分(25:1)，回报仅0.08%，<strong style="color:#ea580c">超出2万别再刷尊然白！</strong><br>
+    • 广发多利白<strong>返利金月上限200元</strong>，即消费20,000元封顶。超出不给返利金。<br>
+    • 光大紫麒麟月刷月开心<strong>需要报名</strong>，不报名不达标。<br>
+    • 微信1000-3券的价值在<strong>有手续费轨道最明显</strong>——0.30%券回报直接覆盖0.26%手续费还有盈余。<br>
+    • 无手续费区的消费尽量走<strong>支付宝</strong>（把微信券留给有手续费区），除非该卡只支持微信渠道。<br>
+    • 保活卡：每月微信充1元话费或支付宝交1笔水电费即可，无需刷大额。
+  </div>
+</div>
+
+</div>
+
+<div class="footnote">
+  数据来源：各银行官网/APP公告 · 飞客网 · 新浪财经 · 截至2026年7月22日<br>
+  优惠信息可能随时调整，以银行最新公告为准。满减类活动务必提前在对应银行APP领券/报名，不领券不生效！
+</div>
+
+</div>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">⬆</button>
+
+<script>
+(function(){
+  var btn = document.getElementById('back-top');
+  window.addEventListener('scroll', function(){
+    btn.classList.toggle('show', window.scrollY > 400);
+  });
+})();
+</script>
+
+</body>
+</html>
