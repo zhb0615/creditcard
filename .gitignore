@@ -1,0 +1,11 @@
+# WorkBuddy internal (regenerated per session)
+.workbuddy/cache/
+.workbuddy/logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+deploy/
