@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日刷卡计划 · 2026年7月23日 周四</title>
+<style>
+  :root {
+    --bg: #f5f6f8; --card-bg: #fff; --text: #1e293b; --muted: #64748b;
+    --border: #e2e8f0; --accent: #2563eb; --accent-light: #eff6ff;
+    --tag-bg: #f1f5f9; --tag-text: #475569;
+    --hot: #ef4444; --hot-bg: #fef2f2;
+    --green: #16a34a; --green-bg: #f0fdf4;
+    --orange: #ea580c; --orange-bg: #fff7ed;
+    --purple: #7c3aed; --purple-bg: #f5f3ff;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.7; padding-bottom: 40px;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
+    color: #fff; padding: 36px 24px 30px; text-align: center;
+  }
+  .hero h1 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+  .hero .date { font-size: 15px; opacity: .75; }
+  .hero .weekday {
+    display: inline-block; margin-top: 12px; padding: 6px 20px;
+    background: rgba(255,255,255,.15); border-radius: 20px;
+    font-size: 14px; font-weight: 600;
+  }
+  .hero .summary { margin-top: 12px; font-size: 13px; opacity: .7; }
+
+  .container { max-width: 680px; margin: 0 auto; padding: 24px 18px; }
+
+  /* timeline */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+
+  .item {
+    position: relative; padding-left: 62px; margin-bottom: 22px;
+  }
+  .item:last-child { margin-bottom: 0; }
+
+  .time-dot {
+    position: absolute; left: 21px; top: 4px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent); border: 3px solid var(--bg);
+    z-index: 1;
+  }
+  .time-dot.morning { background: #f59e0b; }
+  .time-dot.pending { background: var(--muted); }
+  .time-dot.orange { background: var(--orange); }
+
+  .time-label {
+    font-size: 13px; font-weight: 700; color: var(--accent);
+    margin-bottom: 2px;
+  }
+  .time-label.morning { color: #f59e0b; }
+  .time-label.pending { color: var(--muted); }
+
+  .card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px;
+  }
+
+  .card-hd {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px;
+  }
+  .card-title .bank-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 6px;
+    font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .bank-icbc  { background: #d32f2f; }
+  .bank-ccb   { background: #005bac; }
+  .bank-boc   { background: #c41230; }
+  .bank-spdb  { background: #1a2980; }
+  .bank-abc   { background: #009a44; }
+  .bank-pingan{ background: #e85308; }
+  .bank-gdb   { background: #c8102e; }
+  .bank-psbc  { background: #007a3d; }
+  .bank-ceb   { background: #6b2fa0; }
+
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 8px;
+    font-size: 11px; font-weight: 600;
+  }
+  .badge-hot { background: var(--hot-bg); color: var(--hot); }
+  .badge-new { background: var(--green-bg); color: var(--green); }
+  .badge-must { background: var(--orange-bg); color: var(--orange); }
+  .badge-daily { background: var(--purple-bg); color: var(--purple); }
+
+  .card-body { font-size: 13.5px; color: #475569; }
+  .card-body .deal { margin-bottom: 6px; }
+  .card-body .deal:last-child { margin-bottom: 0; }
+  .card-body .emphasis { color: var(--hot); font-weight: 600; }
+  .card-body .entry {
+    display: inline-block; margin-top: 4px; padding: 2px 8px;
+    background: var(--tag-bg); border-radius: 6px; font-size: 12px; color: var(--tag-text);
+  }
+  .card-body .sub {
+    margin-top: 4px; font-size: 12px; color: var(--muted);
+  }
+
+  .divider {
+    text-align: center; margin: 14px 0; padding-left: 62px;
+    font-size: 12px; color: var(--muted); position: relative;
+  }
+  .divider span {
+    background: var(--bg); padding: 0 12px; position: relative; z-index: 1;
+  }
+
+  .footer {
+    margin-top: 36px; padding: 20px 18px; text-align: center;
+    font-size: 12px; color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>今日刷卡计划</h1>
+  <div class="date">2026年7月23日</div>
+  <div class="weekday">周四</div>
+  <div class="summary">共 8 项待办 · 含 5 大银行 + 年费补刷</div>
+</div>
+
+<div class="container">
+
+<div class="timeline">
+
+  <!-- 8:00 -->
+  <div class="item">
+    <div class="time-dot morning"></div>
+    <div class="time-label morning">08:00 开抢</div>
+    <div class="card">
+      <div class="card-hd">
+        <div class="card-title">
+          <span class="bank-icon bank-ccb">建</span>建行APP每日抽立减金
+        </div>
+        <span class="badge badge-daily">每日</span>
+      </div>
+      <div class="card-body">
+        <div class="entry">入口：建行APP → 首页 → 每日签到抽奖</div>
+        <div class="sub">抽 0.18~88 元立减金，每日必做</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10:00 -->
+  <div class="item">
+    <div class="time-dot"></div>
+    <div class="time-label">10:00 起</div>
+    <div class="card">
+      <div class="card-hd">
+        <div class="card-title">
+          <span class="bank-icon bank-spdb">浦</span>浦发茶咖半价
+        </div>
+        <span class="badge badge-hot">半价</span>
+      </div>
+      <div class="card-body">
+        <div class="deal">喜茶 <span class="emphasis">9.5元</span> / 茶百道 <span class="emphasis">8元</span> / 霸王茶姬 <span class="emphasis">8元</span></div>
+        <div class="deal">奈雪 <span class="emphasis">9.5元</span> / 瑞幸 <span class="emphasis">9.9元</span> / 蜜雪冰城 <span class="emphasis">1元</span></div>
+        <div class="entry">入口：浦发银行APP → 生活 → 茶咖半价</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 加油 -->
+  <div class="item">
+    <div class="time-dot orange"></div>
+    <div class="time-label">全天可用（需提前领券）</div>
+    <div class="card">
+      <div class="card-hd">
+        <div class="card-title">
+          <span class="bank-icon bank-icbc">工</span>工行周四加油 满200减20
+        </div>
+        <span class="badge badge-must">周四专享</span>
+      </div>
+      <div class="card-body">
+        <div class="entry">领券入口：工银e生活APP → 精选 → 优惠券中心 → 加油券</div>
+        <div class="entry">使用：加油站 → 微信支付选工行卡</div>
+        <div class="sub">需先在e生活plus提前领券，领完再去加油</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 萌宠日 -->
+  <div class="item">
+    <div class="time-dot"></div>
+    <div class="time-label">全天可用</div>
+    <div class="card">
+      <div class="card-hd">
+        <div class="card-title">
+          <span class="bank-icon bank-ccb">建</span>建行生活 周四萌宠日
+        </div>
+        <span class="badge badge-hot">满50减20</span>
+      </div>
+      <div class="card-body">
+        <div class="deal">宠物相关消费 <span class="emphasis">满50减20</span></div>
+        <div class="entry">入口：建行生活APP → 首页 → 萌宠日</div>
+        <div class="sub">养宠人士福利，宠物用品/医疗/洗护均可</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 浦发茶咖半价 重复了 -->
+  <!-- 签到分割线 -->
+  <div class="divider"><span>⬇ 每日必做 ⬇</span></div>
+
+  <!-- 签到 -->
+  <div class="item">
+    <div class="time-dot pending"></div>
+    <div class="time-label pending">全天 · 有空就做</div>
+    <div class="card">
+      <div class="card-hd">
+        <div class="card-title">
+          <span class="bank-icon bank-icbc">签</span>各银行APP签到
+        </div>
+        <span class="badge badge-daily">每日</span>
+      </div>
+      <div class="card-body">
+        <div class="deal">中国银行APP · 建行APP · 工行APP · 农行APP</div>
+        <div class="deal">浦发银行APP · 平安口袋银行 · 光大阳光惠生活</div>
+        <div class="deal">广发发现精彩 · 邮储银行APP</div>
+        <div class="sub">逐个打开签到即可，换积分/立减金全靠签到攒</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 年费补刷 -->
+  <div class="item">
+    <div class="time-dot pending"></div>
+    <div class="time-label pending">全天 · 今日重点</div>
+    <div class="card">
+      <div class="card-hd">
+        <div class="card-title">
+          <span class="bank-icon bank-icbc">补</span>补充年费笔数缺口
+        </div>
+        <span class="badge badge-must">重要</span>
+      </div>
+      <div class="card-body">
+        <div class="deal"><strong>建行全球支付VISA</strong> — 刷 <span class="emphasis">1笔</span>（任意金额）<span class="entry">火种卡</span></div>
+        <div class="deal"><strong>中行卡皮巴拉</strong> — 刷 <span class="emphasis">1笔</span>（任意金额）<span class="entry">火种卡</span></div>
+        <div class="deal"><strong>工行卡</strong> — 刷 <span class="emphasis">1笔</span>（任意金额）<span class="entry">火种卡</span></div>
+        <div class="sub">三家火种卡各补1笔，微信/支付宝小额支付即可，防年费翻车</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.timeline -->
+
+<div class="footer">
+  信用卡优惠清单 · 2026年7月 · WorkBuddy 自动生成
+</div>
+
+</div>
+
+</body>
+</html>
